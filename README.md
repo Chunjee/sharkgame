@@ -1,6 +1,11 @@
 This is a personal fork of the [Shark Game](https://github.com/Cirrial/SharkGame) by [@Cirrial](https://github.com/Cirrial).
 
-Original README text:
+## To do
+
+- [ ] Set up different stylsheet for each world
+
+
+## Original README text:
 
 > # Shark Game #
 
