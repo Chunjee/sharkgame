@@ -1,4 +1,6 @@
-This is a personal fork of the [Shark Game](https://github.com/Cirrial/SharkGame) by [@Cirrial](https://github.com/Cirrial)
+This is a personal fork of the [Shark Game](https://github.com/Cirrial/SharkGame) by [@Cirrial](https://github.com/Cirrial).
+
+Original README text:
 
 > # Shark Game #
 
