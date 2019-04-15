@@ -2,6 +2,7 @@ This is a personal fork of the [Shark Game](https://github.com/Cirrial/SharkGame
 
 ## To do
 
+- [ ] Show how generation rates on home tab (not Grotto)
 - [ ] Set up different stylsheet for each world
 
 
