@@ -3,7 +3,8 @@ var SharkGame = SharkGame || {};
 
 // CORE VARIABLES AND HELPER FUNCTIONS
 $.extend(SharkGame, {
-  GAME_NAMES: ["Five Seconds A Shark",
+  GAME_NAMES: [
+    "Five Seconds A Shark",
     "Next Shark Game",
     "Next Shark Game: Barkfest",
     "Sharky Clicker",
@@ -46,7 +47,8 @@ $.extend(SharkGame, {
   gameOver: false,
   wonGame: false,
 
-  credits: "<p>This game was originally created in 3 days for Seamergency 2014.<br/>" +
+  credits: 
+    "<p>This game was originally created in 3 days for Seamergency 2014.<br/>" +
     "<span class='smallDesc'>(Technically it was 4 days, but sometimes plans go awry.)</span></p>" +
     "<p>It was made by <a href='http://cirri.al'>Cirr</a> who needs to update his website.<br/>" +
     "He has a rarely updated <a href='https://twitter.com/Cirrial'>Twitter</a> though.</p>" +
@@ -54,12 +56,14 @@ $.extend(SharkGame, {
     "<span class='smallDesc'>Dylan is also graciously hosting this game.</span></p>",
 
 
-  ending: "<p>Congratulations! You did it.<br/>You saved the sharks!</p>" +
+  ending: 
+    "<p>Congratulations! You did it.<br/>You saved the sharks!</p>" +
     "<p>The gate leads away from this strange ocean...</p>" +
     "<p>Back home to the oceans you came from!</p>" +
     "<h3>Or are they?</h3>",
 
-  help: "<p>This game is a game about discovery, resources, and does not demand your full attention. " +
+  help: 
+    "<p>This game is a game about discovery, resources, and does not demand your full attention. " +
     "You are free to pay as much attention to the game as you want. " +
     "It will happily run in the background, and works even while closed.</p>" +
     "<p>To begin, you should catch fish. Once you have some fish, more actions will become available. " +
@@ -67,7 +71,8 @@ $.extend(SharkGame, {
     "<p>If you are ever stuck, try actions you haven't yet tried. " +
     "Remember, though, that sometimes patience is the only way forward. Patience and ever escalating numbers.</p>",
 
-  donate: "<p>You can <a href='http://www.sharktrust.org/en/donate' target='_blank'>donate to help save sharks and mantas</a>!</p>" +
+  donate: 
+    "<p>You can <a href='http://www.sharktrust.org/en/donate' target='_blank'>donate to help save sharks and mantas</a>!</p>" +
     "<p>Seems only fitting, given this game was made for a charity stream!</p>" +
     "<p><span class='smallDescAllowClicks'>(But if you'd rather, you can also " +
     "<a href='https://www.paypal.com/cgi-bin/" +
