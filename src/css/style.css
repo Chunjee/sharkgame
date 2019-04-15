@@ -60,7 +60,7 @@ br {
 }
 
 #gameName {
-  display: none;
+  font-size: 1.2rem;
 }
 
 #versionNumber {

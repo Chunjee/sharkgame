@@ -43,10 +43,15 @@ $.extend(SharkGame, {
   timestampRunEnd: false,
 
   sidebarHidden: true,
-  paneGenerated: false,
 
   gameOver: false,
   wonGame: false,
+
+  // element selectors
+  overlay: document.getElementById('overlay'),
+  pane: document.getElementById('pane'),
+  paneTitle: document.getElementById('paneHeaderTitleDiv'),
+  paneCloseButton: document.getElementById('paneHeaderCloseButton'),
 
   credits: 
     "<p>This game was originally created in 3 days for Seamergency 2014.<br/>" +
@@ -70,19 +75,6 @@ $.extend(SharkGame, {
     "If you have no idea what these actions do, click the \"Toggle descriptions\" button for more information.</p>" +
     "<p>If you are ever stuck, try actions you haven't yet tried. " +
     "Remember, though, that sometimes patience is the only way forward. Patience and ever escalating numbers.</p>",
-
-  donate: 
-    "<p>You can <a href='http://www.sharktrust.org/en/donate' target='_blank'>donate to help save sharks and mantas</a>!</p>" +
-    "<p>Seems only fitting, given this game was made for a charity stream!</p>" +
-    "<p><span class='smallDescAllowClicks'>(But if you'd rather, you can also " +
-    "<a href='https://www.paypal.com/cgi-bin/" +
-    "webscr?cmd=_donations&business=G3WPPAYAWTJCJ&lc=GB&" +
-    "item_name=Shark%20Game%20Developer%20Support&" +
-    "item_number=Shark%20Game%20Support&no_note=1&" +
-    "no_shipping=1&currency_code=USD&" +
-    "bn=PP%2dDonationsBF%3adonate%2epng%3aNonHosted' " +
-    "target='_blank'>support the developer</a>" +
-    " if you'd like.)</span></p>",
 
   spriteIconPath: "img/sharksprites.png",
   spriteHomeEventPath: "img/sharkeventsprites.png",
@@ -215,7 +207,7 @@ SharkGame.TitleBar = {
   creditsLink: {
     name: 'credits',
     onClick: function () {
-      SharkGame.Main.showPane("Credits", SharkGame.credits);
+      SharkGame.Main.showModal("Credits", SharkGame.credits);
     }
   },
 };
@@ -337,7 +329,7 @@ SharkGame.Main = {
     }
     $('#sidebar').hide();
     var overlay = $('#overlay');
-    overlay.hide();
+    //overlay.hide();
     $('#gameName').html("- " + SharkGame.GAME_NAME + " -");
     $('#versionNumber').html("v" + SharkGame.VERSION + " - " + SharkGame.VERSION_NAME);
     SharkGame.sidebarHidden = true;
@@ -841,66 +833,55 @@ SharkGame.Main = {
     }
   },
 
-  buildPane: function () {
-    var pane;
-    pane = $('<div>').attr("id", "pane");
-    $('body').append(pane);
+  showModal: function(title, content) {
+    var pane = SharkGame.pane;
+    var overlay = SharkGame.overlay;
+    var closeButtonDiv = SharkGame.paneCloseButton;
+    var paneTitle = SharkGame.paneTitle;
 
-    // set up structure of pane
-    var titleDiv = $('<div>').attr("id", "paneHeader");
-    titleDiv.append($('<div>').attr("id", "paneHeaderTitleDiv"));
-    titleDiv.append($('<div>')
-      .attr("id", "paneHeaderCloseButtonDiv")
-      .append($('<button>')
-        .attr("id", "paneHeaderCloseButton")
-        .addClass("min")
-        .html("&nbsp x &nbsp")
-        .click(SharkGame.Main.hidePane)
-      ));
-    pane.append(titleDiv);
-    pane.append($('<div>').attr("id", "paneHeaderEnd").addClass("clear-fix"));
-    pane.append($('<div>').attr("id", "paneContent"));
+    // if animated:
+    if (SharkGame.Settings.current.showAnimations) {
+      
+    } else {
 
-    pane.hide();
-    SharkGame.paneGenerated = true;
-    return pane;
+    }
+
+    // show overlay
+    if (overlay.classList.contains('hidden') && overlay.style.display === 'none') {
+      overlay.style.display = '';
+      overlay.classList.remove('hidden');
+    }
+
+    // set up pane
+    if (!title || title === '') {
+      paneTitle.style.display = 'none';
+    } else {
+      paneTitle.innerHTML = '<h3 class="pane-title">' + title + '</h3>';
+    }
+
+    // show pane
+    if (pane.classList.contains('hidden') && pane.style.display === 'none') {
+      pane.style.display = '';
+      pane.classList.remove('hidden');
+    }
+
   },
 
   showPane: function (title, contents, hideCloseButton, fadeInTime, customOpacity) {
-    var pane;
-
-    // GENERATE PANE IF THIS IS THE FIRST TIME
-    if (!SharkGame.paneGenerated) {
-      pane = SharkGame.Main.buildPane();
-    } else {
-      pane = $('#pane');
-    }
-
-    // begin fading in/displaying overlay if it isn't already visible
-    var overlay = $("#overlay");
-    // is it already up?
     fadeInTime = fadeInTime || 600;
-    if (overlay.is(':hidden')) {
-      // nope, show overlay
-      var overlayOpacity = customOpacity || 0.5;
-      if (SharkGame.Settings.current.showAnimations) {
-        overlay.show()
-          .css("opacity", 0)
-          .animate({
-            opacity: overlayOpacity
-          }, fadeInTime);
-      } else {
-        overlay.show()
-          .css("opacity", overlayOpacity);
-      }
-      // adjust overlay height
-      overlay.height($(document).height());
+
+    var pane = document.getElementById('pane');
+    var overlay = SharkGame.overlay;
+    var closeButtonDiv = SharkGame.paneCloseButton;
+    var titleDiv = SharkGame.paneTitle;
+    var $overlay = $('#overlay');
+
+    // show overlay
+    if (overlay.classList.contains('hidden')) {
+      overlay.classList.remove('hidden');
     }
 
     // adjust header
-    var titleDiv = $('#paneHeaderTitleDiv');
-    var closeButtonDiv = $('#paneHeaderCloseButtonDiv');
-
     if (!title || title === "") {
       titleDiv.hide();
     } else {
@@ -935,14 +916,16 @@ SharkGame.Main = {
 
     paneContent.append(contents);
     if (SharkGame.Settings.current.showAnimations && customOpacity) {
-      pane.show()
+      $('#pane').show()
         .css("opacity", 0)
         .animate({
           opacity: 1.0
         }, fadeInTime);
     } else {
-      pane.show();
+      $('#pane').show();
     }
+
+    document.getElementById('paneHeaderCloseButton').addEventListener('click', SharkGame.Main.hidePane);
   },
 
   hidePane: function () {
@@ -11567,12 +11550,7 @@ SharkGame.Gateway = {
 
     // PREPARE GATEWAY PANE
     // set up classes
-    var pane;
-    if (!SharkGame.paneGenerated) {
-      pane = SharkGame.Main.buildPane();
-    } else {
-      pane = $('#pane');
-    }
+    var pane = $('#pane');
     pane.addClass("gateway");
 
     var overlay = $('#overlay');
