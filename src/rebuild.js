@@ -1,3 +1,4 @@
+'use strict';
 /* -------------------------- main.js -------------------------- */
 var SharkGame = SharkGame || {};
 
@@ -147,13 +148,13 @@ $.extend(SharkGame, {
       imageDiv.height(50);
     }
     return imageDiv;
-  }
+  },
 
 });
 
 SharkGame.TitleBar = {
   saveLink: {
-    name: "save",
+    name: 'save',
     main: true,
     onClick: function () {
       try {
@@ -167,28 +168,19 @@ SharkGame.TitleBar = {
       } catch (err) {
         SharkGame.Log.addError(err.message);
       }
-
     }
   },
 
   optionsLink: {
-    name: "options",
+    name: 'options',
     main: true,
     onClick: function () {
       SharkGame.Main.showOptions();
     }
   },
 
-  changelogLink: {
-    name: "changelog",
-    main: false,
-    onClick: function () {
-      SharkGame.Main.showChangelog();
-    }
-  },
-
   helpLink: {
-    name: "help",
+    name: 'help',
     main: true,
     onClick: function () {
       SharkGame.Main.showHelp();
@@ -196,7 +188,7 @@ SharkGame.TitleBar = {
   },
 
   skipLink: {
-    name: "skip",
+    name: 'skip',
     main: true,
     onClick: function () {
       if (SharkGame.Main.isFirstTime()) { // save people stranded on home world
@@ -213,21 +205,19 @@ SharkGame.TitleBar = {
     }
   },
 
+  changelogLink: {
+    name: 'changelog',
+    onClick: function () {
+      SharkGame.Main.showChangelog();
+    }
+  },
+
   creditsLink: {
-    name: "credits",
-    main: false,
+    name: 'credits',
     onClick: function () {
       SharkGame.Main.showPane("Credits", SharkGame.credits);
     }
   },
-
-  donateLink: {
-    name: "donate",
-    main: false,
-    onClick: function () {
-      SharkGame.Main.showPane("Donate", SharkGame.donate);
-    }
-  }
 };
 
 SharkGame.Tabs = {
@@ -235,7 +225,6 @@ SharkGame.Tabs = {
 };
 
 SharkGame.Main = {
-
   tickHandler: -1,
   autosaveHandler: -1,
 
@@ -332,8 +321,6 @@ SharkGame.Main = {
     return formatted;
   },
 
-  // credit where it's due, i didn't write this (regexes fill me with fear), pulled from
-  // http://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript/196991#196991
   toTitleCase: function (str) {
     return str.replace(/\w\S*/g, function (txt) {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -352,7 +339,7 @@ SharkGame.Main = {
     var overlay = $('#overlay');
     overlay.hide();
     $('#gameName').html("- " + SharkGame.GAME_NAME + " -");
-    $('#versionNumber').html("v " + SharkGame.VERSION + " â€” " + SharkGame.VERSION_NAME);
+    $('#versionNumber').html("v" + SharkGame.VERSION + " - " + SharkGame.VERSION_NAME);
     SharkGame.sidebarHidden = true;
     SharkGame.gameOver = false;
 
@@ -412,11 +399,6 @@ SharkGame.Main = {
       }
     }
 
-    // rename a game option if this is a first time run
-    if (SharkGame.Main.isFirstTime()) {
-      SharkGame.TitleBar.skipLink.name = "reset";
-      SharkGame.Main.setUpTitleBar();
-    }
 
     // discover actions that were present in last save
     SharkGame.Home.discoverActions();
@@ -518,18 +500,23 @@ SharkGame.Main = {
   },
 
   setUpTitleBar: function () {
-    var titleMenu = $('#titlemenu');
-    var subTitleMenu = $('#subtitlemenu');
-    titleMenu.empty();
-    subTitleMenu.empty();
-    $.each(SharkGame.TitleBar, function (k, v) {
-      var option = "<li><a id='" + k + "' href='javascript:;'>" + v.name + "</a></li>";
-      if (v.main) {
-        titleMenu.append(option);
+    // rename a game option if this is a first time run
+    if (SharkGame.Main.isFirstTime()) {
+      SharkGame.TitleBar.skipLink.name = 'reset';
+    }
+    // generate html links
+    var links = Object.keys(SharkGame.TitleBar);
+    links.forEach(function(name, i){
+      var html = '<li><a id="' + name + '" href="javascript:;">' + SharkGame.TitleBar[name].name + "</a></li>";
+      if (SharkGame.TitleBar[name].main) {
+        document.getElementById('titlemenu').innerHTML += html;
       } else {
-        subTitleMenu.append(option);
+        document.getElementById('subtitlemenu').innerHTML += html;
       }
-      $('#' + k).click(v.onClick);
+    });
+    // add click function
+    links.forEach(function(name){
+      document.getElementById(name).addEventListener('click', SharkGame.TitleBar[name].onClick);
     });
   },
 
