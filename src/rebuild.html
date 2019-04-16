@@ -59,17 +59,36 @@
   
 </div>
 
-<div id="overlay" class="hidden" style="display: none"></div>
-<div id="pane" class="hidden" style="display: none">
-  <div id="paneHeader">
-    <div id="paneHeaderTitleDiv"></div>
-    <div id="paneHeaderCloseButtonDiv">
-      <button id="paneHeaderCloseButton">&times;</button>
-    </div>
-  </div>
-  <div id="paneHeaderEnd" class="clear-fix"></div>
-  <div id="paneContent"></div>
+
+
+<!-- hidden stuff -->
+<div id="modal" class="hidden" style="display: none">
+  <header id="modal-header">
+    <h3 id="modal-title"></h3>
+    <button id="modal-close">&times;</button>
+  </header>
+  <div id="modal-content"></div>
 </div>
+<div id="overlay" class="hidden" style="display: none"></div>
+
+<!-- text for modals -->
+<div style="display: none">
+  <div id="help">
+    <p>This game is about discovery, resources, and does not demand your full attention. You are free to pay as much attention to the game as you want. It will happily run in the background, and works even while closed.</p>
+    <p>To begin, you should catch fish. Once you have some fish, more actions will become available. If you have no idea what these actions do, click the "Toggle descriptions" button for more information.</p>
+    <p>If you are ever stuck, try actions you haven't yet tried. Remember, though, that sometimes patience is the only way forward. Patience and ever escalating numbers.</p>
+  </div>
+  <div id="credits">
+    <p>This game was originally coded by <a href="http://cirri.al">Cirr</a>. Below is the original credits info.</p>
+    <blockquote>
+      <p>This game was originally created in 3 days for Seamergency 2014. <span class="small">(Technically it was 4 days, but sometimes plans go awry.)</span></p>
+      <p>It was made by <a href="http://cirri.al">Cirr</a> who needs to update his website. He has a rarely updated <a href="https://twitter.com/Cirrial">Twitter</a> though.</p>
+      <p>Additional code and credit help provided by Dylan and Sam Red. <span class="small">Dylan is also graciously hosting this game.</span></p>
+    </blockquote>
+  </div>
+</div>
+
+
 
 <script type="text/javascript" src="js/lib/jquery.min.js"></script>
 <script type="text/javascript" src="js/lib/underscore-min.js"></script>
