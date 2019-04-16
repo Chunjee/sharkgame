@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Shark Game</title>
+  <meta charset="utf-8">
+  <meta property="og:description" itemprop="description" name="description" content="A web game about resources, discovery and sharks.">
+  <meta property="og:image" itemprop="image" content="http://cirri.al/sharks/img/sharkgame.png"/>
+  <meta property="og:image:type" content="image/png"/>
+  <meta property="og:image:width" content="200"/>
+  <meta property="og:image:height" content="200"/>
+  <meta property="og:title" itemprop="name" content="Shark Game"/>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+  <link rel="image_src" href="img/sharkgame.png"/>
+  <link rel="apple-touch-icon" href="http://cirri.al/sharks/img/sharkgame.png">
+
+  <!-- <link href="css/style.css" rel="stylesheet" type="text/css" title="default"> -->
+  <link href="css/new.css" rel="stylesheet" type="text/css" title="default">
+
+</head>
+<body>
+<noscript>
+  <h1>Shark Game??</h1>
+
+  <p>Oh dear! It seems you have Javascript disabled, or that your current browser does not support scripts.</p>
+  <p>Shark Game requires scripts to work. Otherwise it's just a static webpage that doesn't do much.</p>
+
+  <pre>
+          ,
+        .';
+    .-'` .'
+  ,`.-'-.`\
+; /     '-'
+| \       ,-,
+\  '-.__   )_`'._
+  '.     ```      ``'--._
+.-' ,                   `'-.
+  '-'`-._           ((   o   )  - scripts plz.
+        `'--....(`- ,__..--'
+                  '-'`
+  </pre>
+</noscript>
+
+<div id="game" style="display: none">
+  <div id="title">
+    <h1 id="gameName">- title -</h1>
+    <h4 id="versionNumber"></h4>
+    <div id="titlebar">
+      <ul id="titlemenu"></ul>
+      <ul id="subtitlemenu"></ul>
+    </div>
+  </div>
+
+  <div id="sidebar">
+    <div id="status"></div>
+    <div id="log"></div>
+  </div>
+
+  <div id="content"></div>
+  
+</div>
+
+
+
+<!-- hidden stuff -->
+<div id="modal" class="hidden" style="display: none">
+  <header id="modal-header">
+    <h3 id="modal-title"></h3>
+    <button id="modal-close">&times;</button>
+  </header>
+  <div id="modal-content"></div>
+</div>
+<div id="overlay" class="hidden" style="display: none"></div>
+
+<!-- text for modals -->
+<div style="display: none">
+  <div id="help">
+    <p>This game is about discovery, resources, and does not demand your full attention. You are free to pay as much attention to the game as you want. It will happily run in the background, and works even while closed.</p>
+    <p>To begin, you should catch fish. Once you have some fish, more actions will become available. If you have no idea what these actions do, click the "Toggle descriptions" button for more information.</p>
+    <p>If you are ever stuck, try actions you haven't yet tried. Remember, though, that sometimes patience is the only way forward. Patience and ever escalating numbers.</p>
+  </div>
+  <div id="credits">
+    <p>This game was originally coded by <a href="http://cirri.al">Cirr</a>. Below is the original credits info.</p>
+    <blockquote>
+      <p>This game was originally created in 3 days for Seamergency 2014. <span class="small">(Technically it was 4 days, but sometimes plans go awry.)</span></p>
+      <p>It was made by <a href="http://cirri.al">Cirr</a> who needs to update his website. He has a rarely updated <a href="https://twitter.com/Cirrial">Twitter</a> though.</p>
+      <p>Additional code and credit help provided by Dylan and Sam Red. <span class="small">Dylan is also graciously hosting this game.</span></p>
+    </blockquote>
+  </div>
+</div>
+
+
+
+<script type="text/javascript" src="js/lib/underscore-min.js"></script>
+<script type="text/javascript" src="js/lib/base64-ascii85.js"></script>
+<script type="text/javascript" src="js/lib/pako.js"></script>
+
+<script type="text/javascript" src="sharky.js"></script>
+</body>
+</html>

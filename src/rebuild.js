@@ -2,21 +2,6 @@
 /* -------------------------- main.js -------------------------- */
 var SharkGame = SharkGame || {};
 
-var sharky = sharky || {};
-
-sharky = {
-  // element selectors
-  overlay: document.getElementById('overlay'),
-  modal: document.getElementById('modal'),
-  modalTitle: document.getElementById('modal-title'),
-  modalContent: document.getElementById('modal-content'),
-  modalClose: document.getElementById('modal-close'),
-
-  modalCredits: document.getElementById('credits'),
-  modalHelp: document.getElementById('help'),
-};
-
-
 // CORE VARIABLES AND HELPER FUNCTIONS
 $.extend(SharkGame, {
   GAME_NAMES: [
@@ -62,6 +47,15 @@ $.extend(SharkGame, {
   gameOver: false,
   wonGame: false,
 
+  // element selectors
+  overlay: document.getElementById('overlay'),
+  modal: document.getElementById('modal'),
+  modalTitle: document.getElementById('modal-title'),
+  modalContent: document.getElementById('modal-content'),
+  modalClose: document.getElementById('modal-close'),
+
+  modalCredits: document.getElementById('credits'),
+  modalHelp: document.getElementById('help'),
 
   ending: 
     "<p>Congratulations! You did it.<br/>You saved the sharks!</p>" +
@@ -293,7 +287,7 @@ SharkGame.TitleBar = {
     name: 'help',
     main: true,
     onClick: function () {
-      SharkGame.Main.showModal("Help", sharky.modalHelp.innerHTML);
+      SharkGame.Main.showModal("Help", SharkGame.modalHelp.innerHTML);
     }
   },
 
@@ -325,7 +319,7 @@ SharkGame.TitleBar = {
   creditsLink: {
     name: 'credits',
     onClick: function () {
-      SharkGame.Main.showModal("Credits", sharky.modalCredits.innerHTML);
+      SharkGame.Main.showModal("Credits", SharkGame.modalCredits.innerHTML);
     }
   },
 };
@@ -960,10 +954,10 @@ SharkGame.Main = {
   },
 
   showModal: function(title, content, hideCloseButton) {
-    var modal = sharky.modal;
-    var overlay = sharky.overlay;
-    var modalTitle = sharky.modalTitle;
-    var modalContent = sharky.modalContent;
+    var modal = SharkGame.modal;
+    var overlay = SharkGame.overlay;
+    var modalTitle = SharkGame.modalTitle;
+    var modalContent = SharkGame.modalContent;
 
     // if animated .. TODO
     if (SharkGame.Settings.current.showAnimations) {
@@ -989,7 +983,7 @@ SharkGame.Main = {
 
     // closeable?
     if (!hideCloseButton) {
-      var modalClose = sharky.modalClose;
+      var modalClose = SharkGame.modalClose;
   
       modalClose.addEventListener('click', function(){
         overlay.classList.add('hidden');
