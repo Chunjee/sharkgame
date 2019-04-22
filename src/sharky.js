@@ -356,6 +356,20 @@ SHARKY.main = {
 
     SHARKY.resources.init();
 
+
+    // start ticking
+    if (!SHARKY.main.ticker) {
+      SHARKY.main.ticker = setInterval(SHARKY.main.tick, 100);
+    }
+  },
+
+  tick: function() {
+    if (SHARKY.main.gameOver) {
+      // gateway stuff
+      return;
+    }
+
+    
   }
 }
 
@@ -443,7 +457,6 @@ SHARKY.test = {
     console.log(SHARKY.player)
   }
 };
-
 
 
 

@@ -1,0 +1,30 @@
+
+// naming
+var make = [
+  render,
+  generate,
+  create,
+  add
+];
+
+var update = [
+  change
+];
+
+var init = [
+  set,
+  setup,
+  declare,
+  load,
+  run
+];
+
+var format;
+var upgrades = [
+  buildings,
+  unlocks,
+];
+var buildings;
+var get = [
+  gain
+]
