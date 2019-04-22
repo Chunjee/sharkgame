@@ -160,28 +160,57 @@ SHARKY.changelog = {
       "Resource table, log, initial buttons, the works."
     ]
   },
-}
+};
+
+SHARKY.settings = {
+  current: {},
+  buyAmount: {
+    defaultSetting: 1,
+    show: false,
+    options: [
+      1,
+      10,
+      100,
+      -3,
+      -2,
+      -1
+    ]
+  },
+  groupResources: {
+    defaultSetting: false,
+    show: true,
+    name: "Group Resources",
+    desc: "Group resources by categories in the sidebar",
+    options: [
+      true,
+      false
+    ],
+    onChange: {},
+  },
+
+  // TODO
+};
 
 SHARKY.header = {
   links: {
     save: {
       name: 'save',
       onClick: function() {
-        // ..
+        // TODO
       }
     },
   
     settings: {
       name: 'settings',
       onClick: function() {
-        // ..
+        SHARKY.header.setupSettings();
       }
     },
 
     changelog: {
       name: 'changelog',
       onClick: function() {
-        SHARKY.header.changelogSetUp();
+        SHARKY.header.setupChangelog();
       }
     },
   
@@ -224,7 +253,8 @@ SHARKY.header = {
     });
   },
 
-  changelogSetUp: function() {
+  setupChangelog: function() {
+    var changelogName = SHARKY.header.links.changelog.name;
 
     function generateChangeLog(changelog, contentDiv) {
       var cl = Object.keys(changelog);
@@ -261,18 +291,31 @@ SHARKY.header = {
 
     // old changelog
     var changelogOldContent = document.createElement('blockquote');
-    changelogOldContent.setAttribute('id', 'changelog-old');
+    changelogOldContent.setAttribute('id', changelogName+'-old');
     generateChangeLog(SHARKY.changelog.old, changelogOldContent);
     changelogContent.append(changelogOldContent);
 
     // new changelog
     var changelogNewContent = document.createElement('div');
-    changelogNewContent.setAttribute('id', 'changelog-new');
+    changelogNewContent.setAttribute('id', changelogName+'-new');
     generateChangeLog(SHARKY.changelog.new, changelogNewContent);
     changelogContent.prepend(changelogNewContent);
 
-    SHARKY.util.showModal('changelog', changelogContent.innerHTML);
+    SHARKY.util.showModal(changelogName, changelogContent.innerHTML);
   },
+
+  setupSettings: function() {
+    var settingsName = SHARKY.header.links.settings.name;
+
+    var settings = document.createElement('div');
+    settings.setAttribute('id', settingsName+'-content');
+
+    var settingsOptions = Object.keys(SHARKY.settings);
+    settingsOptions.forEach(function(key, val) {
+      // TODO
+    });
+    SHARKY.util.showModal(settingsName, settings.innerHTML);
+  }
 };
 
 SHARKY.world = {
