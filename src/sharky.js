@@ -162,35 +162,6 @@ SHARKY.changelog = {
   },
 };
 
-SHARKY.settings = {
-  current: {},
-  buyAmount: {
-    defaultSetting: 1,
-    show: false,
-    options: [
-      1,
-      10,
-      100,
-      -3,
-      -2,
-      -1
-    ]
-  },
-  groupResources: {
-    defaultSetting: false,
-    show: true,
-    name: "Group Resources",
-    desc: "Group resources by categories in the sidebar",
-    options: [
-      true,
-      false
-    ],
-    onChange: {},
-  },
-
-  // TODO
-};
-
 SHARKY.header = {
   links: {
     save: {
@@ -322,12 +293,6 @@ SHARKY.world = {
   worldType: 'start'
 };
 
-SHARKY.playerResources = {};
-SHARKY.resources = {
-  getTotalResource: function(resource) {
-    return SHARKY.playerResources[resource].totalAmount;
-  }
-}
 
 SHARKY.util = {
   // isFirstTime: SHARKY.world.worldType === 'start' && !(SHARKY.resources.getTotalResource('essence') > 0),
@@ -375,15 +340,107 @@ SHARKY.util = {
 };
 
 SHARKY.main = {
+  sidebarHidden: true,
+  gameOver: false,
+
+  // also functions as a reset
   init: function() {
+    SHARKY.main.sidebarHidden = true;
+    SHARKY.main.gameOver = false;
+
+    // reset settings
+    SHARKY.settings.current = {};
+
+    // setup header links
     SHARKY.header.setup();
 
+    SHARKY.resources.init();
 
+  }
+}
+
+SHARKY.settings = {
+  current: {},
+  buyAmount: {
+    defaultSetting: 1,
+    show: false,
+    options: [
+      1,
+      10,
+      100,
+      -3,
+      -2,
+      -1
+    ]
+  },
+  groupResources: {
+    defaultSetting: false,
+    show: true,
+    name: "Group Resources",
+    desc: "Group resources by categories in the sidebar",
+    options: [
+      true,
+      false
+    ],
+    onChange: {},
+  },
+
+  // TODO
+};
+
+SHARKY.player = {
+  resources: {}
+};
+
+SHARKY.resources = {
+  list: {
+    essence: {
+      name: 'essence',
+      singular: 'essence',
+      value: -1
+    },
+  
+    shark: {
+      name: 'sharks',
+      singular: 'shark',
+      income: {
+        'fish': 1
+      },
+      jobs: [
+        'scientist',
+        'nurse'
+      ],
+      value: 1000
+    },
+  
+    ray: {
+      name: 'rays',
+      singular: 'ray',
+      income: {
+        'fish': 0.2,
+        'sand': 1
+      },
+      jobs: [
+        'laser',
+        'maker'
+      ],
+      value: 1000
+    }
+  },
+
+  init: function() {
+    // set all resources to 0
+    var resources = Object.keys(SHARKY.resources.list);
+    resources.forEach(function(resource){
+      SHARKY.player.resources[resource] = {};
+      SHARKY.player.resources[resource].amount = 0;
+    });
   }
 }
 
 SHARKY.test = {
   test: function(){
+    console.log(SHARKY.player)
   }
 };
 
