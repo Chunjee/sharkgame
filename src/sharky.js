@@ -1,6 +1,7 @@
 var SHARKY = SHARKY || {};
 
 SHARKY.VERSION = '0.1.0';
+SHARKY.INTERVAL = 100;
 
 SHARKY.save = {
   timestampLastSave: false,
@@ -290,7 +291,19 @@ SHARKY.header = {
 };
 
 SHARKY.world = {
-  worldType: 'start'
+  type: 'start',
+  resources: {},
+  planetLevel: 1,
+
+  init: function() {
+    SHARKY.world.reset();
+  },
+
+  reset: function() {
+    var world = SHARKY.world;
+
+    // TODO
+  }
 };
 
 
@@ -359,7 +372,7 @@ SHARKY.main = {
 
     // start ticking
     if (!SHARKY.main.ticker) {
-      SHARKY.main.ticker = setInterval(SHARKY.main.tick, 100);
+      SHARKY.main.ticker = setInterval(SHARKY.main.tick, SHARKY.INTERVAL);
     }
   },
 

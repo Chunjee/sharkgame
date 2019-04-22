@@ -4,7 +4,9 @@ var make = [
   render,
   generate,
   create,
-  add
+  add,
+  build,
+  construct
 ];
 
 var update = [

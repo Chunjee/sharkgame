@@ -4,31 +4,7 @@ var SharkGame = SharkGame || {};
 
 // CORE VARIABLES AND HELPER FUNCTIONS
 $.extend(SharkGame, {
-  GAME_NAMES: [
-    "Five Seconds A Shark",
-    "Next Shark Game",
-    "Next Shark Game: Barkfest",
-    "Sharky Clicker",
-    "Weird Oceans",
-    "You Have To Name The Shark Game",
-    "Shark A Lark",
-    "Bark Shark",
-    "Fin Idle",
-    "Ray of Dreams",
-    "Shark Saver",
-    "Shoal Sharker",
-    "Shark Souls",
-    "Saucy Sharks",
-    "Sharkfall",
-    "Heart of Sharkness",
-    "Sharks and Recreation",
-    "Alone in the Shark",
-    "Sharkpocalypse",
-    "Shark of Darkness",
-    "Strange Oceans"
-  ],
-  GAME_NAME: null,
-  ACTUAL_GAME_NAME: "Shark Game",
+  
   VERSION: 0.71,
   VERSION_NAME: "Stranger Oceans",
   EPSILON: 1E-6, // floating point comparison is a joy
@@ -47,15 +23,7 @@ $.extend(SharkGame, {
   gameOver: false,
   wonGame: false,
 
-  // element selectors
-  overlay: document.getElementById('overlay'),
-  modal: document.getElementById('modal'),
-  modalTitle: document.getElementById('modal-title'),
-  modalContent: document.getElementById('modal-content'),
-  modalClose: document.getElementById('modal-close'),
-
-  modalCredits: document.getElementById('credits'),
-  modalHelp: document.getElementById('help'),
+  
 
   ending: 
     "<p>Congratulations! You did it.<br/>You saved the sharks!</p>" +
@@ -130,131 +98,6 @@ $.extend(SharkGame, {
   },
 
 });
-
-SharkGame.Changelog = {
-  "0.8 - Name Pending (2015/??/??)": [
-    "Went back over the git repo history and added dates to changelog histories. No hiding my having dropped this for over half a year now! <span class='medDesc'>(it has been a while)</span>"
-  ],
-  "0.71 (2014/12/20)": [
-    "Fixed and introduced and fixed a whole bunch of horrible game breaking bugs. If your save was lost, I'm sorry.",
-    "Made the recycler stop lying about what could be made.",
-    "Made the recycler not pay out so much for animals.",
-    "Options are no longer reset after completing a run for real this time.",
-    "Bunch of tweaked gate costs.",
-    "One new machine, and one new job.",
-    "Ten new post-chasm-exploration technologies to invest copious amounts of science into."
-  ],
-  "0.7 - Stranger Oceans (2014/12/19)": [
-    "WHOLE BUNCH OF NEW STUFF ADDED.",
-    "Resource system slightly restructured for something in the future.",
-    "New worlds with some slight changes to availabilities, gate demands, and some other stuff.",
-    "Categories added to Home Sea tab for the benefit of trying to make sense of all the buttons.",
-    "Newly added actions show up in highlights for your convenience.",
-    "The way progress continues beyond the gate is now... a little tweaked.",
-    "Options are no longer reset after completing a run.",
-    "Artifacts exist.",
-    "Images are a work in progress. Apologies for the placeholder graphics in these trying times.",
-    "Partial production when there's insufficient resources for things that take costs. Enjoy watching your incomes slow to a trickle!"
-  ],
-  "0.62 (2014/12/12)": [
-    "Fixed infinity resource requirement for gate.",
-    "Attempted to fix resource table breaking in some browsers for some sidebar widths."
-  ],
-  "0.61 (2014/12/12)": [
-    "Added categories for buttons in the home sea, because there are going to be so many buttons.",
-    "Miscellaneous shuffling of files.",
-    "Some groundwork laid for v0.7, which will be the actual official release."
-  ],
-  "0.6 - Return of Shark (2014/12/8)": [
-    "Major graphical update!",
-    "Now features graphics sort of!",
-    "Some UI rearrangements:" +
-    "<ul><li>Researched techs now show in lab instead of grotto.</li>" +
-    "<li>General stats now on right of grotto instead of left.</li>" +
-    "<li>Large empty space in grotto right column reserved for future use!</li></ul>",
-    "Pointless version subtitle!",
-    "<span class='medDesc'>Added a donate link. Hey, sharks gotta eat.</span>"
-  ],
-  "0.59 (2014/09/30)": [
-    "Bunch of small fixes and tweaks!",
-    "End of run time now shown at the end of a run.",
-    "A couple of fixes for issues only found in IE11.",
-    "Fixed a bug that could let people buy hundreds of things for cheap by overwhelming the game's capacity for input. Hopefully fixed, anyway.",
-    "Gaudy social media share menu shoehorned in below the game title. Enjoy!"
-  ],
-  "0.531 (2014/08/20)": [
-    "Banned sea apples from the recycler because the feedback loop is actually far more crazy powerful than I was expecting. Whoops!"
-  ],
-  "0.53 (2014/08/18)": [
-    "Changed Recycler so that residue into new machines is linear, but into new resources is constant."
-  ],
-  "0.52 (2014/08/18)": [
-    "Emergency bug-fixes.",
-    "Cost to assemble residue into new things is now LINEAR (gets more expensive as you have more things) instead of CONSTANT."
-  ],
-  "0.51 (2014/08/18)": [
-    "Edited the wording of import/export saving.",
-    "Made machine recycling less HORRIBLY BROKEN in terms of how much a machine is worth."
-  ],
-  "0.5 (2014/08/18)": [
-    "Added the Grotto - a way to better understand what you've accomplished so far.",
-    "Added the Recycler. Enjoy discovering its function!",
-    "Added sand machines for more machine sand goodness.",
-    "Fixed oscillation/flickering of resources when at zero with anything providing a negative income.",
-    "Added 'support' for people stumbling across the page with scripts turned off.",
-    "Upped the gate kelp requirement by 10x, due to request.",
-    "Added time tracking. Enjoy seeing how much of your life you've invested in this game.",
-    "Added grouping for displaying resources on the left.",
-    "Added some help and action descriptions.",
-    "Added some text to the home tab to let people have an idea of where they should be heading in the very early game.",
-    "Thanks to assistance from others, the saves are now much, much smaller than before.",
-    "Made crab broods less ridiculously explosive.",
-    "Adjusted some resource colours.",
-    "Added a favicon, probably.",
-    "<span class='medDesc'>Added an overdue copyright notice I guess.</span>"
-  ],
-  "0.48 (2014/08-ish)": [
-    "Saves are now compressed both in local storage and in exported strings.",
-    "Big costs significantly reduced.",
-    "Buy 10, Buy 1/3 max and Buy 1/2 max buttons added.",
-    "Research impact now displayed on research buttons.",
-    "Resource effectiveness multipliers now displayed in table." +
-    "<ul><li>These are not multipliers for how much of that resource you are getting.</li></ul>",
-    "Some dumb behind the scenes things to make the code look nicer.",
-    "Added this changelog!",
-    "Removed upgrades list on the left. It'll come back in a future version.",
-    "Added ray and crab generating resources, and unlocking techs."
-  ],
-  "0.47 (2014/08-ish)": [
-    "Bulk of game content added.",
-    "Last update for Seamergency 2014!"
-  ],
-  "0.4 (2014/08-ish)": [
-    "Added Laboratory tab.",
-    "Added the end of the game tab."
-  ],
-  "0.3 (2014/08-ish)": [
-    "Added description to options.",
-    "Added save import/export.",
-    "Added the ending panel."
-  ],
-  "0.23 (2014/08-ish)": [
-    "Added autosave.",
-    "Income system overhauled.",
-    "Added options panel."
-  ],
-  "0.22 (2014/08-ish)": [
-    "Offline mode added. Resources will increase even with the game off!",
-    "(Resource income not guaranteed to be 100% accurate.)"
-  ],
-  "0.21 (2014/08-ish)": [
-    "Save and load added."
-  ],
-  "<0.21 (2014/08-ish)": [
-    "A whole bunch of stuff.",
-    "Resource table, log, initial buttons, the works."
-  ]
-};
 
 SharkGame.TitleBar = {
   saveLink: {
@@ -435,15 +278,8 @@ SharkGame.Main = {
   init: function () {
     var currDate = new Date();
     SharkGame.before = currDate;
-    if (SharkGame.GAME_NAME === null) {
-      SharkGame.GAME_NAME = SharkGame.choose(SharkGame.GAME_NAMES);
-      document.title = SharkGame.ACTUAL_GAME_NAME + ": " + SharkGame.GAME_NAME;
-    }
-    $('#sidebar').hide();
-    var overlay = $('#overlay');
-    //overlay.hide();
-    $('#gameName').html("- " + SharkGame.GAME_NAME + " -");
-    $('#versionNumber').html("v" + SharkGame.VERSION + " - " + SharkGame.VERSION_NAME);
+    
+    
     SharkGame.sidebarHidden = true;
     SharkGame.gameOver = false;
 
@@ -602,28 +438,6 @@ SharkGame.Main = {
       console.log(err.trace);
     }
   },
-
-  setUpTitleBar: function () {
-    // rename a game option if this is a first time run
-    if (SharkGame.Main.isFirstTime()) {
-      SharkGame.TitleBar.skipLink.name = 'reset';
-    }
-    // generate html links
-    var links = Object.keys(SharkGame.TitleBar);
-    links.forEach(function(name, i){
-      var html = '<li><a id="' + name + '" href="javascript:;">' + SharkGame.TitleBar[name].name + "</a></li>";
-      if (SharkGame.TitleBar[name].main) {
-        document.getElementById('titlemenu').innerHTML += html;
-      } else {
-        document.getElementById('subtitlemenu').innerHTML += html;
-      }
-    });
-    // add click function
-    links.forEach(function(name){
-      document.getElementById(name).addEventListener('click', SharkGame.TitleBar[name].onClick);
-    });
-  },
-
   setUpTab: function () {
     var tabs = SharkGame.Tabs;
     // empty out content div
@@ -864,35 +678,6 @@ SharkGame.Main = {
     // if there is a callback, call it, else call the no op
     (SharkGame.Settings[settingName].onChange || $.noop)();
   },
-  showChangelog: function() {
-    // make changelog div
-    var changelogContent = document.createElement('div');
-    changelogContent.setAttribute('id', 'changelog');
-
-    // get changelog
-    var changelog = Object.keys(SharkGame.Changelog);
-    changelog.forEach(function(v) {
-      // put version into a p
-      var version = document.createElement('p');
-      version.setAttribute('class', 'changelog-version');
-      version.innerHTML = v;
-      
-      // set up a list for details
-      var detailsList = document.createElement('ul');
-      var versionDetails = SharkGame.Changelog[v];
-
-      versionDetails.forEach(function(e){
-        // put details into each list
-        var details = document.createElement('li');
-        details.innerHTML = e;
-        detailsList.append(details);
-      });
-      changelogContent.append(version);
-      changelogContent.append(detailsList);
-    });
-
-    SharkGame.Main.showModal('changelog', changelogContent.innerHTML);
-  },
 
   endGame: function (loadingFromSave) {
     // stop autosaving
@@ -953,81 +738,6 @@ SharkGame.Main = {
     }
   },
 
-  showModal: function(title, content, hideCloseButton) {
-    var modal = SharkGame.modal;
-    var overlay = SharkGame.overlay;
-    var modalTitle = SharkGame.modalTitle;
-    var modalContent = SharkGame.modalContent;
-
-    // if animated .. TODO
-    if (SharkGame.Settings.current.showAnimations) {
-      
-    } else {
-
-    }
-
-    // show overlay
-    if (overlay.classList.contains('hidden') && overlay.style.display === 'none') {
-      overlay.style.display = '';
-      overlay.classList.remove('hidden');
-    }
-
-    // set up pane
-    if (!title || title === '') {
-      modalTitle.style.display = 'none';
-    } else {
-      modalTitle.innerHTML = title;
-    }
-    // insert content
-    modalContent.innerHTML = content;
-
-    // closeable?
-    if (!hideCloseButton) {
-      var modalClose = SharkGame.modalClose;
-  
-      modalClose.addEventListener('click', function(){
-        overlay.classList.add('hidden');
-        modal.classList.add('hidden');
-        overlay.style.display = 'none';
-        modal.style.display = 'none';
-      });
-    } else {
-      // .. don't show close button
-    }
-
-    // show pane
-    if (modal.classList.contains('hidden') && modal.style.display === 'none') {
-      modal.style.display = '';
-      modal.classList.remove('hidden');
-    }
-
-  },
-
-  buildPane: function () {
-    var pane;
-    pane = $('<div>').attr("id", "pane");
-    $('body').append(pane);
-
-    // set up structure of pane
-    var titleDiv = $('<div>').attr("id", "paneHeader");
-    titleDiv.append($('<div>').attr("id", "paneHeaderTitleDiv"));
-    titleDiv.append($('<div>')
-      .attr("id", "paneHeaderCloseButtonDiv")
-      .append($('<button>')
-        .attr("id", "paneHeaderCloseButton")
-        .addClass("min")
-        .html("&nbsp x &nbsp")
-        .click(SharkGame.Main.hidePane)
-      ));
-    pane.append(titleDiv);
-    pane.append($('<div>').attr("id", "paneHeaderEnd").addClass("clear-fix"));
-    pane.append($('<div>').attr("id", "paneContent"));
-
-    pane.hide();
-    SharkGame.paneGenerated = true;
-    return pane;
-  },
-  
   showPane: function (title, contents, hideCloseButton, fadeInTime, customOpacity) {
     var pane;
 
