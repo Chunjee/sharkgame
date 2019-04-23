@@ -7,11 +7,12 @@ SHARKY.save = {
   timestampLastSave: false,
   timestampGameStart: false,
   timestampRunStart: false
-}
+};
 
 SHARKY.el = {
   // element selectors
   game: document.getElementById('game'),
+  content: document.getElementById('content'),
 
   overlay: document.getElementById('overlay'),
   modal: document.getElementById('modal'),
@@ -383,7 +384,7 @@ SHARKY.util = {
   },
   setupTab: function() {
     var tabs = SHARKY.tabs;
-    var content = document.getElementById('content');
+    var content = SHARKY.el.content;
 
     content.innerHTML = '';
 
@@ -627,7 +628,7 @@ SHARKY.tabs.home = {
 
   switchTo: function() {
     var HOME = SHARKY.tabs.home;
-    var content = document.getElementById('content');
+    var content = SHARKY.el.content;
     
     // add tab message
     var tabMessage = document.createElement('div');
@@ -687,8 +688,7 @@ SHARKY.tabs.home = {
 
 SHARKY.test = {
   test: function(){
-    console.log(SHARKY.player)
-    console.log(SHARKY.world.worldResources);
+    
   }
 };
 
