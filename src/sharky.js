@@ -299,15 +299,42 @@ SHARKY.world = {
     SHARKY.world.reset();
   },
 
-  reset: function() {
-    var world = SHARKY.world;
-
+  apply: function() {
     // TODO
-  }
+  },
+
+  applyProperties: function(level) {
+    // TODO
+  },
+
+  reset: function() {
+    SHARKY.world.worldResources = {};
+    var worldResources = SHARKY.world.worldResources;
+    var resources = SHARKY.resources.list;
+
+    // set up defaults
+    Object.keys(resources).forEach(function(r) {
+      worldResources[r] = {};
+      worldResources[r].exists = true;
+      worldResources[r].income = 0;
+      worldResources[r].incomeMultiplier = 1;
+      worldResources[r].boostMultiplier = 1;
+      worldResources[r].artifactMultiplier = 1;
+    });
+  },
+  
 };
 
 
 SHARKY.util = {
+  makeButton: function(id, name, container, onclick) {
+    var button = document.createElement('button');
+    button.setAttribute('id', id);
+    button.innerHTML = name;
+    container.append(button);
+    button.addEventListener('cick', onclick);
+  },
+
   // isFirstTime: SHARKY.world.worldType === 'start' && !(SHARKY.resources.getTotalResource('essence') > 0),
   showModal: function(title, content, hideCloseButton) {
     var modal = SHARKY.el.modal;
@@ -349,7 +376,26 @@ SHARKY.util = {
       modal.style.display = '';
       modal.classList.remove('hidden');
     }
-  }
+  },
+  createTabMenu: function() {
+    var tabs = SHARKY.tabs;
+    // TODO
+  },
+  setupTab: function() {
+    var tabs = SHARKY.tabs;
+    var content = document.getElementById('content');
+
+    content.innerHTML = '';
+
+    SHARKY.util.createTabMenu();
+    SHARKY.util.createBuyButtons();
+
+    tabs[tabs.current].switchTo();
+  },
+  createBuyButtons: function() {
+    var tabs = SHARKY.tabs;
+    // TODO
+  },
 };
 
 SHARKY.main = {
@@ -368,7 +414,14 @@ SHARKY.main = {
     SHARKY.header.setup();
 
     SHARKY.resources.init();
+    SHARKY.world.init();
 
+    SHARKY.tabs.home.init();
+    SHARKY.tabs.current = 'home';
+
+
+    // set up tab
+    SHARKY.util.setupTab();
 
     // start ticking
     if (!SHARKY.main.ticker) {
@@ -382,6 +435,8 @@ SHARKY.main = {
       return;
     }
 
+    var tabs = SHARKY.tabs;
+    tabs[tabs.current].update();
     
   }
 }
@@ -420,6 +475,7 @@ SHARKY.player = {
 };
 
 SHARKY.resources = {
+  // ResourceTable
   list: {
     essence: {
       name: 'essence',
@@ -452,22 +508,187 @@ SHARKY.resources = {
         'maker'
       ],
       value: 1000
+    },
+
+    crab: {
+      name: 'crabs',
+      singular: 'crab',
+      income: {
+        'crystal': 0.01,
+        'coral': 0.02
+      },
+      jobs: [
+        'planter',
+        'brood'
+      ],
+      value: 1000
+    }
+  },
+
+  // ResourceCategories
+  categories: {
+    special: {
+      name: 'special',
+      disposeMessage: ['what have you done?'],
+      resources: [
+        'numen',
+        'essence'
+      ]
+    },
+
+    frenzy: {
+      name: 'frenzy',
+      disposeMessage: [
+        'you bid farewell as your community gets smaller.',
+        'goodbye, friends. there\'s plenty of other fish in the sea.'
+      ],
+      resources: [
+        'shark',
+        'ray',
+        'crab'
+      ]
+    },
+
+    breeders: {
+      name: 'breeders',
+      disposeMessage: [
+        'overpopulation is a real concern!',
+        'parenting is hard work.'
+      ],
+      resources: [
+        'nurse',
+        'maker',
+        'brood'
+      ]
     }
   },
 
   init: function() {
-    // set all resources to 0
+    // set all player resources to 0
     var resources = Object.keys(SHARKY.resources.list);
     resources.forEach(function(resource){
       SHARKY.player.resources[resource] = {};
       SHARKY.player.resources[resource].amount = 0;
+      SHARKY.player.resources[resource].totalAmount = 0;
+      SHARKY.player.resources[resource].incomeMultiplier = 0;
     });
+
+    // idk what this is
+    // populate income table with an entry for each resource!!
+    resources.forEach(function(resource){
+      SHARKY.player.resources[resource] = 0;
+    });
+
+    SHARKY.resources.specialMultipier = 1;
   }
+};
+
+SHARKY.homeActions = {
+  catchFish: {
+    id: 'catch-fish',
+    name: 'catch fish',
+    effect: {
+      resource: {
+        'fish': 1
+      }
+    },
+    cost: {},
+    prereq: {},
+    outcomes: [
+      'dropped the bass.',
+      'a fish.',
+      'ate a catfish.',
+    ],
+    helpText: 'catch a fish.',
+  }
+};
+
+SHARKY.tabs = {};
+
+SHARKY.tabs.home = {
+
+  id: 'home',
+  discovered: true,
+  name: 'home sea',
+  background: '',
+
+  init: function() {
+    var HOME = SHARKY.tabs.home;
+
+    // rename tab
+    
+    // populate action discoveries
+    var ACTIONS = SHARKY.homeActions;
+    Object.keys(ACTIONS).forEach(function(action){
+      ACTIONS[action].discovered = false;
+      ACTIONS[action].newlyDiscovered = false;
+    });
+  },
+
+  switchTo: function() {
+    var HOME = SHARKY.tabs.home;
+    var content = document.getElementById('content');
+    
+    // add tab message
+    var tabMessage = document.createElement('div');
+    tabMessage.setAttribute('id', 'tab-message');
+    content.append(tabMessage);
+
+    // button tabs
+
+    // help button
+
+    // button list
+    var buttonList = document.createElement('div');
+    buttonList.setAttribute('id', 'button-list');
+    content.append(buttonList);
+  },
+
+  update: function() {
+    var HOME = SHARKY.tabs.home;
+    var ACTIONS = SHARKY.homeActions;
+    var container = document.getElementById('button-list');
+    
+    Object.keys(ACTIONS).forEach(function(action) {
+      var action = ACTIONS[action];
+      var button = document.createElement('button');
+      button.setAttribute('id', action.id);
+
+      if (!document.getElementById(action.id)) {
+        if (action.discovered || HOME.prereqsMet(action)) {
+          if (!action.discovered) {
+            action.discovered = true;
+            action.newlyDiscovered = true;
+          }
+          HOME.addButton(action, container);
+        }
+      }
+    });
+  },
+
+  prereqsMet: function() {
+    return true;
+    // TODO
+  },
+
+  addButton: function(action, container) {
+    var HOME = SHARKY.tabs.home;
+    SHARKY.util.makeButton(action.id, action.name, container, HOME.clickButton);
+  },
+  
+  clickButton: function() {
+    console.log('test');
+  },
+
+  createButtonTabs: function() {
+    // TODO
+  },
 }
 
 SHARKY.test = {
   test: function(){
     console.log(SHARKY.player)
+    console.log(SHARKY.world.worldResources);
   }
 };
 
