@@ -449,8 +449,7 @@ SharkGame.Main = {
     SharkGame.Main.createBuyButtons();
 
     // set up tab specific stuff
-    var tab = tabs[tabs.current];
-    var tabCode = tab.code;
+    var tabCode = tabs[tabs.current].code;
     tabCode.switchTo();
   },
 
@@ -12310,10 +12309,12 @@ SharkGame.Home = {
     content.append(tabMessage);
     h.currentExtraMessageIndex = -1;
     h.updateMessage(true);
+
     // button tabs
     var buttonTabDiv = $('<div>').attr("id", "homeTabs");
     content.append(buttonTabDiv);
     h.createButtonTabs();
+
     // help button
     var helpButtonDiv = $('<div>');
     helpButtonDiv.css({
@@ -12322,6 +12323,7 @@ SharkGame.Home = {
     });
     SharkGame.Button.makeButton("helpButton", "&nbsp Toggle descriptions &nbsp", helpButtonDiv, h.toggleHelp).addClass("min-block");
     content.append(helpButtonDiv);
+    
     // button list
     var buttonList = $('<div>').attr("id", "buttonList");
     content.append(buttonList);
