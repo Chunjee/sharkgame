@@ -337,7 +337,7 @@ SHARKY.util = {
     button.setAttribute('id', id);
     button.innerHTML = name;
     container.append(button);
-    button.addEventListener('cick', onclick);
+    button.addEventListener('click', onclick);
   },
 
   // isFirstTime: SHARKY.world.worldType === 'start' && !(SHARKY.resources.getTotalResource('essence') > 0),
