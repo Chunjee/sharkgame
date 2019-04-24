@@ -18,7 +18,6 @@ $.extend(SharkGame, {
   timestampRunStart: false,
   timestampRunEnd: false,
 
-  sidebarHidden: true,
 
   gameOver: false,
   wonGame: false,
@@ -279,8 +278,6 @@ SharkGame.Main = {
     var currDate = new Date();
     SharkGame.before = currDate;
     
-    
-    SharkGame.sidebarHidden = true;
     SharkGame.gameOver = false;
 
     // remove any errant classes
@@ -367,11 +364,6 @@ SharkGame.Main = {
 
       var r = SharkGame.Resources;
       var m = SharkGame.Main;
-
-      // check if the sidebar needs to come back
-      if (SharkGame.sidebarHidden) {
-        m.showSidebarIfNeeded();
-      }
 
       if (elapsedTime > SharkGame.INTERVAL) {
         // Compensate for lost time.
@@ -540,22 +532,6 @@ SharkGame.Main = {
     SharkGame.Tabs[tab].discovered = true;
     // force a total redraw of the navigation
     SharkGame.Main.createTabMenu();
-  },
-
-
-  showSidebarIfNeeded: function () {
-    // if we have any non-zero resources, show sidebar
-    // if we have any log entries, show sidebar
-    if (SharkGame.Resources.haveAnyResources() || SharkGame.Log.haveAnyMessages()) {
-      // show sidebar
-      if (SharkGame.Settings.current.showAnimations) {
-        $('#sidebar').show("500");
-      } else {
-        $('#sidebar').show();
-      }
-      // flag sidebar as shown
-      SharkGame.sidebarHidden = false;
-    }
   },
 
   showOptions: function () {

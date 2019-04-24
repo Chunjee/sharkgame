@@ -1,14 +1,43 @@
+/* ----------------------------
+
+main
+util
+
+data/
+  resourcetable
+  homeactions
+  worldtypes
+  upgrades
+  artifacts
+  sprites
+
+resources
+world
+log
+save
+settings
+gateway
+
+tabs/
+  home
+  lab
+  stats
+  recycler
+  gate
+  reflection
+
+---------------------------- */
+
+/* ---------------------------- main.js ---------------------------- */
 var SHARKY = SHARKY || {};
 
 SHARKY.VERSION = '0.1.0';
 SHARKY.INTERVAL = 100;
-
 SHARKY.save = {
   timestampLastSave: false,
   timestampGameStart: false,
   timestampRunStart: false
 };
-
 SHARKY.el = {
   names: {
     headerMenuID: 'menu',
@@ -30,7 +59,6 @@ SHARKY.el = {
   modalCredits: document.getElementById('credits-content'),
   modalHelp: document.getElementById('help-content'),
 };
-
 SHARKY.changelog = {
   new: {
     "0.1.0": [
@@ -170,7 +198,6 @@ SHARKY.changelog = {
     ]
   },
 };
-
 SHARKY.header = {
   links: {
     save: {
@@ -197,14 +224,14 @@ SHARKY.header = {
     help: {
       name: 'help',
       onClick: function() {
-        SHARKY.util.showModal('help', SHARKY.el.modalHelp.innerHTML);
+        SHARKY.main.showModal('help', SHARKY.el.modalHelp.innerHTML);
       }
     },
   
     credits: {
       name: 'credits',
       onClick: function() {
-        SHARKY.util.showModal('credits', SHARKY.el.modalCredits.innerHTML);
+        SHARKY.main.showModal('credits', SHARKY.el.modalCredits.innerHTML);
       }
     },
   
@@ -217,7 +244,7 @@ SHARKY.header = {
   },
 
   setup: function() {
-   // if (SHARKY.util.isFirstTime) {
+   // if (SHARKY.main.isFirstTime) {
     //  SHARKY.header.links.skip.name = 'reset';
     //}
 
@@ -281,7 +308,7 @@ SHARKY.header = {
     generateChangeLog(SHARKY.changelog.new, changelogNewContent);
     changelogContent.prepend(changelogNewContent);
 
-    SHARKY.util.showModal(changelogName, changelogContent.innerHTML);
+    SHARKY.main.showModal(changelogName, changelogContent.innerHTML);
   },
 
   setupSettings: function() {
@@ -294,60 +321,62 @@ SHARKY.header = {
     settingsOptions.forEach(function(key, val) {
       // TODO
     });
-    SHARKY.util.showModal(settingsName, settings.innerHTML);
+    SHARKY.main.showModal(settingsName, settings.innerHTML);
   }
 };
-
-SHARKY.world = {
-  type: 'start', // worldType
-  resources: {}, // worldResources
-  planetLevel: 1,
-
-  init: function() {
-    SHARKY.world.reset();
-  },
-
-  apply: function() {
-    // TODO
-  },
-
-  applyProperties: function(level) {
-    // TODO
-  },
-
-  reset: function() {
-    var worldResources = SHARKY.world.resources;
-    var resources = SHARKY.resources.list;
-
-    // set up defaults
-    Object.keys(resources).forEach(function(r) {
-      worldResources[r] = {};
-      worldResources[r].exists = true;
-      worldResources[r].income = 0;
-      worldResources[r].incomeMultiplier = 1;
-      worldResources[r].boostMultiplier = 1;
-      worldResources[r].artifactMultiplier = 1;
-    });
-  },
-
-  // does resource exist on this planet?
-  doesResourceExist: function(resource) {
-    return SHARKY.world.resources[resource].exists;
-  },
-  
+SHARKY.tabs = {
+  current: 'home'
 };
+SHARKY.main = {
+  sidebarHidden: true,
+  gameOver: false,
+
+  // also functions as a reset
+  init: function() {
+
+    SHARKY.main.sidebarHidden = true;
+    SHARKY.main.gameOver = false;
+
+    // reset settings
+    SHARKY.settings.current = {};
+
+    // setup header links
+    SHARKY.header.setup();
+
+    // init and reset resources
+    SHARKY.resources.init();
+
+    // init world
+    SHARKY.world.init();
+
+    // init tabs
+    SHARKY.tabs.home.init();
+    SHARKY.tabs.current = 'home';
 
 
-SHARKY.util = {
-  makeButton: function(id, name, container, onclick) {
-    var button = document.createElement('button');
-    button.setAttribute('id', id);
-    button.innerHTML = name;
-    container.append(button);
-    button.addEventListener('click', onclick);
+    // set up tab
+    SHARKY.main.setupTab();
+
+    // start ticking
+    if (!SHARKY.main.ticker) {
+      SHARKY.main.ticker = setInterval(SHARKY.main.tick, SHARKY.INTERVAL);
+    }
   },
 
-  isFirstTime: SHARKY.world ,
+  tick: function() {
+    if (SHARKY.main.gameOver) {
+      // gateway stuff
+      return;
+    }
+
+    SHARKY.resources.updateTable();
+
+    var tabs = SHARKY.tabs;
+    tabs[tabs.current].update();
+
+    
+  },
+
 
   // isFirstTime: SHARKY.world.worldType === 'start' && !(SHARKY.resources.getTotalResource('essence') > 0),
   showModal: function(title, content, hideCloseButton) {
@@ -401,8 +430,8 @@ SHARKY.util = {
 
     content.innerHTML = '';
 
-    SHARKY.util.createTabMenu();
-    SHARKY.util.createBuyButtons();
+    SHARKY.main.createTabMenu();
+    SHARKY.main.createBuyButtons();
 
     tabs[tabs.current].switchTo();
   },
@@ -410,93 +439,41 @@ SHARKY.util = {
     var tabs = SHARKY.tabs;
     // TODO
   },
-};
-
-SHARKY.main = {
-  sidebarHidden: true,
-  gameOver: false,
-
-  // also functions as a reset
-  init: function() {
-
-    SHARKY.main.sidebarHidden = true;
-    SHARKY.main.gameOver = false;
-
-    // reset settings
-    SHARKY.settings.current = {};
-
-    // setup header links
-    SHARKY.header.setup();
-
-    // init and reset resources
-    SHARKY.resources.init();
-
-    // init world
-    SHARKY.world.init();
-
-    // init tabs
-    SHARKY.tabs.home.init();
-    SHARKY.tabs.current = 'home';
-
-
-    // set up tab
-    SHARKY.util.setupTab();
-
-    // start ticking
-    if (!SHARKY.main.ticker) {
-      SHARKY.main.ticker = setInterval(SHARKY.main.tick, SHARKY.INTERVAL);
-    }
-  },
-
-  tick: function() {
-    if (SHARKY.main.gameOver) {
-      // gateway stuff
-      return;
-    }
-
-    SHARKY.resources.updateTable();
-
-    var tabs = SHARKY.tabs;
-    tabs[tabs.current].update();
-
-    
-  }
 }
-
-SHARKY.settings = {
-  current: {},
-  buyAmount: {
-    defaultSetting: 1,
-    show: false,
-    options: [
-      1,
-      10,
-      100,
-      -3,
-      -2,
-      -1
-    ]
+SHARKY.button = {
+  makeButton: function(id, name, container, onclick) {
+    var button = document.createElement('button');
+    button.setAttribute('id', id);
+    button.innerHTML = name;
+    container.append(button);
+    button.addEventListener('click', onclick);
   },
-  groupResources: {
-    defaultSetting: false,
-    show: true,
-    name: "Group Resources",
-    desc: "Group resources by categories in the sidebar",
-    options: [
-      true,
-      false
-    ],
-    onChange: {},
-  },
-
-  // TODO
 };
 
+SHARKY.test = {
+  test: function(){
+    console.log('world resources:');
+    console.log(SHARKY.world.resources);
+    console.log('player resources:');
+    console.log(SHARKY.player.resources);
+
+    SHARKY.resources.reconstructTable();
+  }
+};
+// onload, start the game:
+window.onload = function(){
+  SHARKY.el.game.style.display = '';
+  SHARKY.main.init();
+  SHARKY.test.test();
+};
+
+/* ---------------------------- util.js ---------------------------- */
+SHARKY.util = {};
+/* ---------------------------- data/resourcetable.js + resources.js?? ---------------------------- */
 SHARKY.player = {
   // PlayerResources
   resources: {}
 };
-
 SHARKY.resources = {
   // ResourceTable
   list: {
@@ -686,6 +663,7 @@ SHARKY.resources = {
 
 };
 
+/* ---------------------------- data/homeactions.js ---------------------------- */
 SHARKY.homeActions = {
   catchFish: {
     id: 'catch-fish',
@@ -705,9 +683,87 @@ SHARKY.homeActions = {
     helpText: 'catch a fish.',
   }
 };
+/* ---------------------------- data/worldtypes.js ---------------------------- */
 
-SHARKY.tabs = {};
+/* ---------------------------- data/upgrades.js ---------------------------- */
+/* ---------------------------- data/artifacts.js ---------------------------- */
+/* ---------------------------- data/sprites.js ---------------------------- */
 
+
+/* ---------------------------- resources.js ---------------------------- */
+/* ---------------------------- world.js ---------------------------- */
+SHARKY.world = {
+  type: 'start', // worldType
+  resources: {}, // worldResources
+  planetLevel: 1,
+
+  init: function() {
+    SHARKY.world.reset();
+  },
+
+  apply: function() {
+    // TODO
+  },
+
+  applyProperties: function(level) {
+    // TODO
+  },
+
+  reset: function() {
+    var worldResources = SHARKY.world.resources;
+    var resources = SHARKY.resources.list;
+
+    // set up defaults
+    Object.keys(resources).forEach(function(r) {
+      worldResources[r] = {};
+      worldResources[r].exists = true;
+      worldResources[r].income = 0;
+      worldResources[r].incomeMultiplier = 1;
+      worldResources[r].boostMultiplier = 1;
+      worldResources[r].artifactMultiplier = 1;
+    });
+  },
+
+  // does resource exist on this planet?
+  doesResourceExist: function(resource) {
+    return SHARKY.world.resources[resource].exists;
+  },
+  
+};
+/* ---------------------------- log.js ---------------------------- */
+/* ---------------------------- save.js ---------------------------- */
+/* ---------------------------- settings.js ---------------------------- */
+SHARKY.settings = {
+  current: {},
+  buyAmount: {
+    defaultSetting: 1,
+    show: false,
+    options: [
+      1,
+      10,
+      100,
+      -3,
+      -2,
+      -1
+    ]
+  },
+  groupResources: {
+    defaultSetting: false,
+    show: true,
+    name: "Group Resources",
+    desc: "Group resources by categories in the sidebar",
+    options: [
+      true,
+      false
+    ],
+    onChange: {},
+  },
+
+  // TODO
+};
+/* ---------------------------- gateway.js ---------------------------- */
+
+/* ---------------------------- tabs/home.js ---------------------------- */
 SHARKY.tabs.home = {
 
   id: 'home',
@@ -776,7 +832,7 @@ SHARKY.tabs.home = {
 
   addButton: function(action, container) {
     var HOME = SHARKY.tabs.home;
-    SHARKY.util.makeButton(action.id, action.name, container, HOME.clickButton);
+    SHARKY.button.makeButton(action.id, action.name, container, HOME.clickButton);
   },
   
   clickButton: function() {
@@ -787,25 +843,8 @@ SHARKY.tabs.home = {
     // TODO
   },
 }
-
-SHARKY.test = {
-  test: function(){
-    console.log('world resources:')
-    console.log(SHARKY.world.resources);
-    console.log('player resources:')
-    console.log(SHARKY.player.resources);
-
-    SHARKY.resources.reconstructTable();
-  }
-};
-
-
-
-
-
-// onload, start the game:
-window.onload = function(){
-  SHARKY.el.game.style.display = '';
-  SHARKY.main.init();
-  SHARKY.test.test();
-};
+/* ---------------------------- tabs/lab.js ---------------------------- */
+/* ---------------------------- tabs/stats.js ---------------------------- */
+/* ---------------------------- tabs/recycler.js ---------------------------- */
+/* ---------------------------- tabs/gate.js ---------------------------- */
+/* ---------------------------- tabs/reflection.js ---------------------------- */
