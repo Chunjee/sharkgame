@@ -405,6 +405,7 @@ SHARKY.main = {
 
   // also functions as a reset
   init: function() {
+
     SHARKY.main.sidebarHidden = true;
     SHARKY.main.gameOver = false;
 
@@ -414,9 +415,13 @@ SHARKY.main = {
     // setup header links
     SHARKY.header.setup();
 
+    // init and reset resources
     SHARKY.resources.init();
+
+    // init world
     SHARKY.world.init();
 
+    // init tabs
     SHARKY.tabs.home.init();
     SHARKY.tabs.current = 'home';
 
