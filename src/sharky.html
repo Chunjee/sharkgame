@@ -41,21 +41,23 @@
 </noscript>
 
 <div id="game" style="display: none">
-  <div id="title">
-    <h1 id="gameName">title</h1>
-    <h4 id="versionNumber"></h4>
-    <div id="titlebar">
-      <ul id="titlemenu"></ul>
+  <header id="header">
+    <h1 id="title">title</h1>
+    <h2 id="version"></h2>
+    <div class="menu">
+      <ul id="menu"></ul>
     </div>
-  </div>
-
+  </header>
   <div id="sidebar">
-    <div id="status"></div>
-    <div id="log"></div>
+    <section id="status"></section>
+    <section class="log">
+      <h2 class="log-title">log</h2>
+      <article id="log"></article>
+    </section>
   </div>
 
-  <main>
-    <nav id="menu">
+  <main id="main">
+    <nav id="nav">
       <ul id="tabs"></ul>
     </nav>
     <div id="content"></div>

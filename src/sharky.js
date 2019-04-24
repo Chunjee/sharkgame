@@ -10,13 +10,15 @@ SHARKY.save = {
 };
 
 SHARKY.el = {
+  names: {
+    headerMenuID: 'menu',
+    headerLinksClass: 'menu-link',
+    resourcesTableID: 'resource-table',
+  },
   // main stuff
   game: document.getElementById('game'),
   content: document.getElementById('content'),
-  
-  // uhh
   status: document.getElementById('status'),
-  resourceTableID: 'resource-table',
 
   // modal
   overlay: document.getElementById('overlay'),
@@ -222,8 +224,8 @@ SHARKY.header = {
     // generate links
     var links = Object.keys(SHARKY.header.links);
     links.forEach(function(name){
-      var html = '<li><a id="' + name + '" class="header-link" href="javascript:;">' + SHARKY.header.links[name].name + "</a></li>";
-      document.getElementById('titlemenu').innerHTML += html;
+      var html = '<li><a id="' + name + '" class="' + SHARKY.el.names.headerLinksClass +'" href="javascript:;">' + SHARKY.header.links[name].name + "</a></li>";
+      document.getElementById(SHARKY.el.names.headerMenuID).innerHTML += html;
     });
     // add click function
     links.forEach(function(name){
@@ -297,7 +299,7 @@ SHARKY.header = {
 };
 
 SHARKY.world = {
-  type: 'start',
+  type: 'start', // worldType
   resources: {}, // worldResources
   planetLevel: 1,
 
@@ -344,6 +346,8 @@ SHARKY.util = {
     container.append(button);
     button.addEventListener('click', onclick);
   },
+
+  isFirstTime: SHARKY.world ,
 
   // isFirstTime: SHARKY.world.worldType === 'start' && !(SHARKY.resources.getTotalResource('essence') > 0),
   showModal: function(title, content, hideCloseButton) {
@@ -621,7 +625,7 @@ SHARKY.resources = {
 
   reconstructTable: function() {
     var statusDiv = SHARKY.el.status;
-    var tableID = SHARKY.el.resourceTableID;
+    var tableID = SHARKY.el.names.resourcesTableID;
     var table = document.getElementById(tableID);
     var resources = SHARKY.resources;
     var world = SHARKY.world;

@@ -1,3 +1,32 @@
+/* containers */
+#game {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+}
+#header {
+  flex: 2 100%;
+}
+#sidebar, #main {
+  flex: 1 auto;
+}
+
+/* header */
+.menu ul {
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  display: inline-block;
+}
+
+.menu-link {
+  display: block;
+  padding: 5px;
+}
+
 .hidden {
   transition: opacity 1s;
   opacity: 0;
