@@ -10,16 +10,20 @@ SHARKY.save = {
 };
 
 SHARKY.el = {
-  // element selectors
+  // main stuff
   game: document.getElementById('game'),
   content: document.getElementById('content'),
+  
+  // uhh
+  resourceTableID: 'resource-table',
 
+  // modal
   overlay: document.getElementById('overlay'),
   modal: document.getElementById('modal'),
   modalTitle: document.getElementById('modal-title'),
   modalContent: document.getElementById('modal-content'),
   modalClose: document.getElementById('modal-close'),
-
+  // modal content
   modalCredits: document.getElementById('credits-content'),
   modalHelp: document.getElementById('help-content'),
 };
@@ -441,8 +445,11 @@ SHARKY.main = {
       return;
     }
 
+    SHARKY.resources.updateTable();
+
     var tabs = SHARKY.tabs;
     tabs[tabs.current].update();
+
     
   }
 }
@@ -569,6 +576,8 @@ SHARKY.resources = {
     }
   },
 
+  rebuildTable: false,
+
   init: function() {
     // set all player resources to 0
     var resources = Object.keys(SHARKY.resources.list);
@@ -586,7 +595,39 @@ SHARKY.resources = {
     });
 
     SHARKY.resources.specialMultipier = 1;
-  }
+  },
+
+  updateTable: function() {
+    if (this.rebuildTable) {
+      this.reconstructTable();
+      return;
+    }
+    
+    var playerResources = SHARKY.player.resources;
+    Object.keys(playerResources).forEach(function(k,v) {
+      if (playerResources[k] === 0) {
+        return;
+      }
+      // TODO ... really do all this tho
+    });
+    
+  },
+
+  reconstructTable: function() {
+    var tableID = SHARKY.el.resourceTableID;
+    var table = document.getElementById(tableID);
+
+    // create if it doesn't exist
+    if (!table) {
+      var newTable = document.createElement('table');
+      newTable.setAttribute('id', tableID);
+      table = newTable;
+    }
+
+    // empty
+    table.innerHTML = '';
+  },
+
 };
 
 SHARKY.homeActions = {
@@ -693,7 +734,7 @@ SHARKY.tabs.home = {
 
 SHARKY.test = {
   test: function(){
-    
+    SHARKY.resources.reconstructTable();
   }
 };
 
