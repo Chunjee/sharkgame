@@ -469,12 +469,8 @@ window.onload = function(){
 
 /* ---------------------------- util.js ---------------------------- */
 SHARKY.util = {};
-/* ---------------------------- data/resourcetable.js + resources.js?? ---------------------------- */
-SHARKY.player = {
-  // PlayerResources
-  resources: {}
-};
-SHARKY.resources = {
+/* ---------------------------- data/resourcetable.js ---------------------------- */
+SHARKY.resourceData = {
   // ResourceTable
   list: {
     essence: {
@@ -563,11 +559,47 @@ SHARKY.resources = {
     }
   },
 
+};
+
+/* ---------------------------- data/homeactions.js ---------------------------- */
+SHARKY.homeActions = {
+  catchFish: {
+    id: 'catch-fish',
+    name: 'catch fish',
+    effect: {
+      resource: {
+        'fish': 1
+      }
+    },
+    cost: {},
+    prereq: {},
+    outcomes: [
+      'dropped the bass.',
+      'a fish.',
+      'ate a catfish.',
+    ],
+    helpText: 'catch a fish.',
+  }
+};
+/* ---------------------------- data/worldtypes.js ---------------------------- */
+
+/* ---------------------------- data/upgrades.js ---------------------------- */
+/* ---------------------------- data/artifacts.js ---------------------------- */
+/* ---------------------------- data/sprites.js ---------------------------- */
+
+
+/* ---------------------------- resources.js ---------------------------- */
+SHARKY.player = {
+  resources: {}, // PlayerResources
+  income: {}, // PlayerIncomeTable
+};
+SHARKY.resources = {
+
   rebuildTable: false,
 
   init: function() {
     // set all player resources to 0
-    var resources = Object.keys(SHARKY.resources.list);
+    var resources = Object.keys(SHARKY.resourceData.list);
     resources.forEach(function(resource){
       SHARKY.player.resources[resource] = {};
       SHARKY.player.resources[resource].amount = 0;
@@ -604,6 +636,7 @@ SHARKY.resources = {
     var statusDiv = SHARKY.el.status;
     var tableID = SHARKY.el.names.resourcesTableID;
     var table = document.getElementById(tableID);
+    var resourceData = SHARKY.resourceData;
     var resources = SHARKY.resources;
     var world = SHARKY.world;
 
@@ -619,7 +652,7 @@ SHARKY.resources = {
     table.innerHTML = '';
 
     // go through data, add to table if total amount > 0
-    Object.keys(resources.list).forEach(function(r) {
+    Object.keys(resourceData.list).forEach(function(r) {
       var row = resources.constructTableRow(r);
       table.appendChild(row);
       if (resources.getTotalResource(r) > 0 && world.doesResourceExist(r)) {
@@ -657,40 +690,11 @@ SHARKY.resources = {
   },
 
   getResourceName: function(r) {
-    return SHARKY.resources.list[r].name;
+    return SHARKY.resourceData.list[r].name;
     // TODO
   },
 
-};
-
-/* ---------------------------- data/homeactions.js ---------------------------- */
-SHARKY.homeActions = {
-  catchFish: {
-    id: 'catch-fish',
-    name: 'catch fish',
-    effect: {
-      resource: {
-        'fish': 1
-      }
-    },
-    cost: {},
-    prereq: {},
-    outcomes: [
-      'dropped the bass.',
-      'a fish.',
-      'ate a catfish.',
-    ],
-    helpText: 'catch a fish.',
-  }
-};
-/* ---------------------------- data/worldtypes.js ---------------------------- */
-
-/* ---------------------------- data/upgrades.js ---------------------------- */
-/* ---------------------------- data/artifacts.js ---------------------------- */
-/* ---------------------------- data/sprites.js ---------------------------- */
-
-
-/* ---------------------------- resources.js ---------------------------- */
+}
 /* ---------------------------- world.js ---------------------------- */
 SHARKY.world = {
   type: 'start', // worldType
@@ -711,7 +715,7 @@ SHARKY.world = {
 
   reset: function() {
     var worldResources = SHARKY.world.resources;
-    var resources = SHARKY.resources.list;
+    var resources = SHARKY.resourceData.list;
 
     // set up defaults
     Object.keys(resources).forEach(function(r) {

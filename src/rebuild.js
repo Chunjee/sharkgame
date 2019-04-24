@@ -6,7 +6,7 @@ var SharkGame = SharkGame || {};
 $.extend(SharkGame, {
   
   VERSION: 0.71,
-  VERSION_NAME: "Stranger Oceans",
+
   EPSILON: 1E-6, // floating point comparison is a joy
 
   INTERVAL: (1000 / 10), // 20 FPS
@@ -18,11 +18,8 @@ $.extend(SharkGame, {
   timestampRunStart: false,
   timestampRunEnd: false,
 
-
   gameOver: false,
   wonGame: false,
-
-  
 
   ending: 
     "<p>Congratulations! You did it.<br/>You saved the sharks!</p>" +
