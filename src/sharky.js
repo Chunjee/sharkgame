@@ -15,6 +15,7 @@ SHARKY.el = {
   content: document.getElementById('content'),
   
   // uhh
+  status: document.getElementById('status'),
   resourceTableID: 'resource-table',
 
   // modal
@@ -297,7 +298,7 @@ SHARKY.header = {
 
 SHARKY.world = {
   type: 'start',
-  resources: {},
+  resources: {}, // worldResources
   planetLevel: 1,
 
   init: function() {
@@ -313,8 +314,7 @@ SHARKY.world = {
   },
 
   reset: function() {
-    SHARKY.world.worldResources = {};
-    var worldResources = SHARKY.world.worldResources;
+    var worldResources = SHARKY.world.resources;
     var resources = SHARKY.resources.list;
 
     // set up defaults
@@ -326,6 +326,11 @@ SHARKY.world = {
       worldResources[r].boostMultiplier = 1;
       worldResources[r].artifactMultiplier = 1;
     });
+  },
+
+  // does resource exist on this planet?
+  doesResourceExist: function(resource) {
+    return SHARKY.world.resources[resource].exists;
   },
   
 };
@@ -484,6 +489,7 @@ SHARKY.settings = {
 };
 
 SHARKY.player = {
+  // PlayerResources
   resources: {}
 };
 
@@ -585,13 +591,13 @@ SHARKY.resources = {
       SHARKY.player.resources[resource] = {};
       SHARKY.player.resources[resource].amount = 0;
       SHARKY.player.resources[resource].totalAmount = 0;
-      SHARKY.player.resources[resource].incomeMultiplier = 0;
+      SHARKY.player.resources[resource].incomeMultiplier = 1;
     });
 
-    // idk what this is
+    // idk what this is .. yet
     // populate income table with an entry for each resource!!
     resources.forEach(function(resource){
-      SHARKY.player.resources[resource] = 0;
+      // SHARKY.player.resources[resource] = 0;
     });
 
     SHARKY.resources.specialMultipier = 1;
@@ -614,18 +620,64 @@ SHARKY.resources = {
   },
 
   reconstructTable: function() {
+    var statusDiv = SHARKY.el.status;
     var tableID = SHARKY.el.resourceTableID;
     var table = document.getElementById(tableID);
+    var resources = SHARKY.resources;
+    var world = SHARKY.world;
 
     // create if it doesn't exist
     if (!table) {
       var newTable = document.createElement('table');
       newTable.setAttribute('id', tableID);
       table = newTable;
+      statusDiv.appendChild(table);
     }
 
     // empty
     table.innerHTML = '';
+
+    // go through data, add to table if total amount > 0
+    Object.keys(resources.list).forEach(function(r) {
+      var row = resources.constructTableRow(r);
+      table.appendChild(row);
+      if (resources.getTotalResource(r) > 0 && world.doesResourceExist(r)) {
+        var row = resources.constructTableRow(r);
+      }
+    });
+  },
+
+  constructTableRow: function(resourceKey) {
+    var tr = document.createElement('tr');
+    var playerResources = SHARKY.player.resources[resourceKey];
+
+    if (playerResources.totalAmount > 0) {
+      var tdName = document.createElement('td');
+      var tdAmount = document.createElement('td');
+      var tdIncome = document.createElement('td');
+
+      tdName.setAttribute('id', 'resource-' + resourceKey);
+      tdName.innerHTML = SHARKY.resources.getResourceName(resourceKey);
+      tr.appendChild(tdName);
+
+      tdAmount.setAttribute('id', 'amount-' + resourceKey);
+      tdAmount.innerHTML = playerResources.amount;
+      tr.appendChild(tdAmount);
+
+      tdIncome.setAttribute('id', 'income-' + resourceKey);
+      tr.appendChild(tdIncome);
+    }
+
+    return tr;
+  },
+
+  getTotalResource: function(r) {
+    return SHARKY.player.resources[r].totalAmount;
+  },
+
+  getResourceName: function(r) {
+    return SHARKY.resources.list[r].name;
+    // TODO
   },
 
 };
@@ -734,6 +786,11 @@ SHARKY.tabs.home = {
 
 SHARKY.test = {
   test: function(){
+    console.log('world resources:')
+    console.log(SHARKY.world.resources);
+    console.log('player resources:')
+    console.log(SHARKY.player.resources);
+
     SHARKY.resources.reconstructTable();
   }
 };

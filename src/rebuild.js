@@ -851,31 +851,6 @@ SharkGame.Button = {
   }
 };
 
-SharkGame.FunFacts = [
-  "Shark Game's initial bare minimum code came from an abandoned idle game about bees. Almost no trace of bees remains!",
-  "The existence of resources that create resources that create resources in this game were inspired by Derivative Clicker!",
-  "Kitten Game was an inspiration for this game! This surprises probably no one. The very first message the game gives you is a nod of sorts.",
-  "There have been social behaviours observed in lemon sharks, and evidence that suggests they prefer company to being alone.",
-  "Sea apples are a type of sea cucumber.",
-  "Magic crystals are probably not real.",
-  "There is nothing suspicious about the machines.",
-  "There are many species of sharks that investigate things with their mouths. This can end badly for the subject of investigation.",
-  "Some shark species display 'tonic immobility' when rubbed on the nose. They stop moving, appear deeply relaxed, and can stay this way for up to 15 minutes before swimming away.",
-  "In some shark species eggs hatch within their mothers, and in some of these species the hatched babies eat unfertilised or even unhatched eggs.",
-  "Rays can be thought of as flattened sharks.",
-  "Rays are pancakes of the sea. (note: probably not true)",
-  "Chimaera are related to sharks and rays and have a venomous spine in front of their dorsal fin.",
-  "More people are killed by lightning every year than by sharks.",
-  "There are real eusocial shrimps that live as a community in sponges on reefs, complete with queens.",
-  "White sharks have been observed to have a variety of body language signals to indicate submission and dominance towards each other without violence.",
-  "Sharks with lasers were overdone, okay?",
-  "There is a surprising deficit of cookie in this game.",
-  "Remoras were banished from the oceans in the long bygone eras. The sharks hope they never come back.",
-  "A kiss from a shark can make you immortal. But only if they want you to be immortal.",
-  "A shark is worth one in the bush, and a bunch in the sea water. Don't put sharks in bushes."
-];
-
-
 $(document).ready(function () {
   $('#game').show();
   SharkGame.Main.init();
