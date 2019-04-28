@@ -807,6 +807,27 @@ SHARKY.tabs.home = {
     content.append(buttonList);
   },
 
+  discoverActions: function() {
+
+  },
+  
+  createButtonTabs: function() {
+    // TODO
+  },
+
+  updateTab: function(tabToUpdate) {
+
+  },
+
+  // changeButtonTab
+  changeTab: function(tabToChangeTo) {
+
+  },
+
+  updateMessage: function(suppressAnimation) {
+
+  },
+
   update: function() {
     var HOME = SHARKY.tabs.home;
     var ACTIONS = SHARKY.homeActions;
@@ -843,9 +864,6 @@ SHARKY.tabs.home = {
     console.log('test');
   },
 
-  createButtonTabs: function() {
-    // TODO
-  },
 }
 /* ---------------------------- tabs/lab.js ---------------------------- */
 /* ---------------------------- tabs/stats.js ---------------------------- */
