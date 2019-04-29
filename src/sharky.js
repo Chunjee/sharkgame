@@ -622,12 +622,14 @@ SHARKY.resources = {
       return;
     }
     
+    // loop over table rows and update values
     var playerResources = SHARKY.player.resources;
     Object.keys(playerResources).forEach(function(k,v) {
-      if (playerResources[k] === 0) {
+      if (playerResources[k].amount === 0) {
+        // no resources
         return;
       }
-      // TODO ... really do all this tho
+      // TO DO
     });
     
   },
@@ -824,7 +826,11 @@ SHARKY.tabs.home = {
             action.newlyDiscovered = true;
           }
           HOME.addButton(action, container);
+        } else {
+          // TODO
         }
+      } else {
+        // TODO
       }
     });
   },
