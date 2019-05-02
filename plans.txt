@@ -3,55 +3,51 @@ CHANGELOG:
 - A WHOLE BUNCH OF STUFF (<v0.21)
 
 - DATA (v0.21)
-    - Save
-    - Load
+  - Save
+  - Load
 
 v 0.22:
-    - Offline mode (save timestamp of last save so that on load calculate what should have been done)
+  - Offline mode (save timestamp of last save so that on load calculate what should have been done)
 
 v 0.23:
 
-	- Change save/load messages to not be coupled to save/load functions
-		- have calling functions log
-    - Autosave (5 minute duration default, 1 minute minimum)
-    - change income system
-            - resources can impact income directly
-            - instead of adding income, recalculate income on any change to resource table
-    - Options
-        - Buy 1/Buy 100/Buy Max buttons (this setting should be saved as well as other options)
-        - A WAY TO ACTUALLY CHANGE THESE OPTIONS
-        - Autosave frequency
-        - Toggle offline mode (toggle)
-        - Log length max (5 minimum, 30 max)
-        - Sidebar width (20%, 25%, 30%, 35%)
-        - Show animations (toggle)
+- Change save/load messages to not be coupled to save/load functions
+  - have calling functions log
+  - Autosave (5 minute duration default, 1 minute minimum)
+  - change income system
+    - resources can impact income directly
+    - instead of adding income, recalculate income on any change to resource table
+  - Options
+    - Buy 1/Buy 100/Buy Max buttons (this setting should be saved as well as other options)
+    - A WAY TO ACTUALLY CHANGE THESE OPTIONS
+    - Autosave frequency
+    - Toggle offline mode (toggle)
+    - Log length max (5 minimum, 30 max)
+    - Sidebar width (20%, 25%, 30%, 35%)
+    - Show animations (toggle)
 
 v 0.3:
 
-	- adjust resourceList to html to darken span colour if a parameter is passed
-	- add descriptions to options
-    - save import/export
-            - could be handled entirely in one text field in options menu
-    - add ending screen
-        - fade in overlay
-        - show credits and end of game
+- adjust resourceList to html to darken span colour if a parameter is passed
+- add descriptions to options
+  - save import/export
+    - could be handled entirely in one text field in options menu
+  - add ending screen
+    - fade in overlay
+    - show credits and end of game
 
 v 0.4:
 
-    - Gate tab
-    		- unlocked through a lab upgrade
-    		- requires a whole bunch of resources in different slots to open
-    		- ends game on opening
-	- Laboratory tab
-	    - upgrades
-	        - allow new things
-	        - improve existing things
+- Gate tab
+  - unlocked through a lab upgrade
+  - requires a whole bunch of resources in different slots to open
+  - ends game on opening
+- Laboratory tab
+  - upgrades
+    - allow new things
+    - improve existing things
 
-
-			
-	- add content for the expectation we don't get past diplomacy/trading tab
-	
-
+- add content for the expectation we don't get past diplomacy/trading tab
 
 
 sharks
