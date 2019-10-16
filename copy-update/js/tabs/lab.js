@@ -14,10 +14,10 @@ SharkGame.Lab = {
     }
   },
 
-  message: "Sort of just off to the side, the science sharks congregate and discuss things with words you've never heard before.",
+  message: "<div id='tabMessage'>Sort of just off to the side, the science sharks congregate and discuss things with words you've never heard before.</div>",
   messageDone: 
-    "Sort of just off to the side, the science sharks quietly wrap up their badly disguised party and pretend to work.<br/>" +
-    "Looks like that's it! No more things to figure out.",
+    "<div id='tabMessage'>Sort of just off to the side, the science sharks quietly wrap up their badly disguised party and pretend to work.<br/>" +
+    "Looks like that's it! No more things to figure out.</div>",
 
 
 
@@ -127,7 +127,8 @@ SharkGame.Lab = {
     var upgradeData = SharkGame.Upgrades[upgradeName];
     var upgradeCost = upgradeData.cost;
 
-
+    button.addClass('upgradeButton');
+    
     var enableButton;
     if ($.isEmptyObject(upgradeCost)) {
       enableButton = true; // always enable free buttons
@@ -136,10 +137,14 @@ SharkGame.Lab = {
     }
 
     var effects = SharkGame.Lab.getResearchEffects(upgradeData, !enableButton);
-    var label = upgradeData.name + "<br/>" + upgradeData.desc + "<br/>" + effects;
+    var labelHtml = "<div class='label'><p class='upgradeName'>" + upgradeData.name + 
+                    "</p><p class='upgradeDesc'>" + upgradeData.desc + "</p><p class='effects'>" +
+                    effects + "</p></div>"
+    var label = labelHtml;
+    // upgradeData.name + "<br/>" + upgradeData.desc + "<br/>" + effects;
     var costText = r.resourceListToString(upgradeCost, !enableButton);
     if (costText != "") {
-      label += "<br/>Cost: " + costText;
+      label += "<p class='upgradeCost'>Cost: " + costText + "</p>";
     }
     button.prop("disabled", !enableButton).html(label);
 
@@ -281,8 +286,8 @@ SharkGame.Lab = {
     var list = $('<ul>');
     $.each(u, function (k, v) {
       if (v.purchased) {
-        list.append($("<li>")
-          .html(v.name + "<br/><span class='medDesc'>" + v.effectDesc + "</span>")
+        list.append($("<li class='purchasedUpgrade'>")
+          .html("<p class='upgradeName'>" + v.name + "<span class='medDesc'>" + v.effectDesc + "</span></p>")
         );
       }
     });

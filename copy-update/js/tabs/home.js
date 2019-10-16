@@ -335,14 +335,13 @@ SharkGame.Home = {
     if (h.currentExtraMessageIndex !== selectedIndex) {
       h.currentExtraMessageIndex = selectedIndex;
       var tabMessage = $('#tabMessage');
-      console.log(tabMessage);
       if (SharkGame.Settings.current.showTabImages) {
         var sceneDiv = $('#tabSceneImage');
         if (sceneDiv.size() === 0) {
           sceneDiv = $('<div>').attr("id", "tabSceneImage");
         }
       }
-      var message = "<div id='mainMessage'>You are a shark in a " + wi.shortDesc + " sea.</div>";
+      var message = "<div id='tabMessage'>You are a shark in a " + wi.shortDesc + " sea.</div>";
       message += "<div id='extraMessage' class='medDesc'></div>";
       tabMessage.html(message).prepend(sceneDiv);
 
