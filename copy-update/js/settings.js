@@ -6,12 +6,12 @@ SharkGame.Settings = {
     defaultSetting: 1,
     show: false,
     options: [
-      1,
-      10,
-      100,
-      -3,
+      -1,
       -2,
-      -1
+      -3,
+      100,
+      10,
+      1
     ]
   },
 
