@@ -12,51 +12,51 @@ SharkGame.Home = {
   extraMessages: [
     // FIRST RUN
     {
-      message: "&nbsp<br>&nbsp"
+      message: ""
     },
     {
       unlock: {resource: {fish: 5}},
-      message: "You attract the attention of a shark. Maybe they can help you catch fish!<br>&nbsp"
+      message: "You attract the attention of a shark. Maybe they can help you catch fish!"
     },
     {
       unlock: {resource: {shark: 1}},
-      message: "More sharks swim over, curious and watchful.<br>&nbsp"
+      message: "More sharks swim over, curious and watchful."
     },
     {
       unlock: {resource: {fish: 15}},
-      message: "Some rays drift over.<br>&nbsp"
+      message: "Some rays drift over."
     },
     {
       unlock: {resource: {shark: 1, ray: 1}},
-      message: "You have quite the group going now.<br>&nbsp"
+      message: "You have quite the group going now."
     },
     {
       unlock: {resource: {shark: 4, ray: 4}},
-      message: "Some curious crabs come over.<br>&nbsp"
+      message: "Some curious crabs come over."
     },
     {
       unlock: {resource: {shark: 1, ray: 1, crab: 1}},
-      message: "Your new tribe is at your command!<br>&nbsp"
+      message: "Your new tribe is at your command!"
     },
     {
       unlock: {resource: {shark: 1, crystal: 10}},
-      message: "The crystals are shiny. Some sharks stare at them curiously.<br>&nbsp"
+      message: "The crystals are shiny. Some sharks stare at them curiously."
     },
     {
       unlock: {resource: {scientist: 1}},
-      message: "The science sharks swim in their own school.<br>&nbsp"
+      message: "The science sharks swim in their own school."
     },
     {
       unlock: {upgrade: ["crystalContainer"]},
-      message: "More discoveries are needed.<br>&nbsp"
+      message: "More discoveries are needed."
     },
     {
       unlock: {resource: {nurse: 1}},
-      message: "The shark community grows with time.<br>&nbsp"
+      message: "The shark community grows with time."
     },
     {
       unlock: {upgrade: ["exploration"]},
-      message: "You hear faint songs and cries in the distance.<br>&nbsp"
+      message: "You hear faint songs and cries in the distance."
     },
     {
       unlock: {upgrade: ["automation"]},
@@ -68,25 +68,25 @@ SharkGame.Home = {
     },
     {
       unlock: {upgrade: ["gateDiscovery"]},
-      message: "The gate beckons. The secret must be unlocked.<br>&nbsp"
+      message: "The gate beckons. The secret must be unlocked."
     },
     // LATER RUNS
     // INITIAL WORLD STATUSES
     {
       unlock: {world: "chaotic"},
-      message: "Overwhelming reinforcements. Overwhelming everything. So hard to focus.<br>&nbsp"
+      message: "Overwhelming reinforcements. Overwhelming everything. So hard to focus."
     },
     {
       unlock: {world: "haven"},
-      message: "The oceans are rich with life. But it's still not home.<br>&nbsp"
+      message: "The oceans are rich with life. But it's still not home."
     },
     {
       unlock: {world: "marine"},
-      message: "The fish never run dry here. This place feels so familiar.<br>&nbsp"
+      message: "The fish never run dry here. This place feels so familiar."
     },
     {
       unlock: {world: "tempestuous"},
-      message: "The storm never ends, and many are lost to its violent throes.<br>&nbsp"
+      message: "The storm never ends, and many are lost to its violent throes."
     },
     {
       unlock: {world: "violent"},
@@ -98,11 +98,11 @@ SharkGame.Home = {
     },
     {
       unlock: {world: "shrouded"},
-      message: "The crystals are easier to find, but the darkness makes it hard to find anything else.<br>&nbsp"
+      message: "The crystals are easier to find, but the darkness makes it hard to find anything else."
     },
     {
       unlock: {world: "frigid"},
-      message: "So cold. The food supplies freeze quickly here. Too hard to chew.<br>&nbsp"
+      message: "So cold. The food supplies freeze quickly here. Too hard to chew."
     },
     // BANKED ESSENCE
     {
@@ -141,7 +141,7 @@ SharkGame.Home = {
     // UNIQUE STATUSES
     {
       unlock: {resource: {chorus: 1}},
-      message: "The whale song fills you with the same feeling as the gates. But so much smaller.<br>&nbsp"
+      message: "The whale song fills you with the same feeling as the gates. But so much smaller."
     },
     // DANGER STATUSES
     {
@@ -335,14 +335,15 @@ SharkGame.Home = {
     if (h.currentExtraMessageIndex !== selectedIndex) {
       h.currentExtraMessageIndex = selectedIndex;
       var tabMessage = $('#tabMessage');
+      console.log(tabMessage);
       if (SharkGame.Settings.current.showTabImages) {
         var sceneDiv = $('#tabSceneImage');
         if (sceneDiv.size() === 0) {
           sceneDiv = $('<div>').attr("id", "tabSceneImage");
         }
       }
-      var message = "You are a shark in a " + wi.shortDesc + " sea.";
-      message += "<br><span id='extraMessage' class='medDesc'>&nbsp<br>&nbsp</span>";
+      var message = "<div id='mainMessage'>You are a shark in a " + wi.shortDesc + " sea.</div>";
+      message += "<div id='extraMessage' class='medDesc'></div>";
       tabMessage.html(message).prepend(sceneDiv);
 
       var extraMessageSel = $('#extraMessage');
@@ -460,13 +461,13 @@ SharkGame.Home = {
     } else {
       var costText = r.resourceListToString(actionCost, !enableButton);
       if (costText != "") {
-        label += "<br>Cost: " + costText;
+        label += "<p class='buttonCost'>Cost: " + costText + "</p>";
       }
     }
 
     if (SharkGame.Settings.current.showTabHelp) {
       if (actionData.helpText) {
-        label += "<br><span class='medDesc'>" + actionData.helpText + "</span>";
+        label += "<p class='medDesc'>" + actionData.helpText + "</p>";
       }
     }
     button.prop("disabled", !enableButton)
