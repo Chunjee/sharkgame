@@ -341,7 +341,7 @@ SharkGame.Home = {
           sceneDiv = $('<div>').attr("id", "tabSceneImage");
         }
       }
-      var message = "<div id='tabMessage'>You are a shark in a " + wi.shortDesc + " sea.</div>";
+      var message = "<div id='homeMessage' class='tabMessage'>You are a shark in a " + wi.shortDesc + " sea.</div>";
       message += "<div id='extraMessage' class='medDesc'></div>";
       tabMessage.html(message).prepend(sceneDiv);
 

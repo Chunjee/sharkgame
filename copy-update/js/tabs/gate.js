@@ -80,7 +80,7 @@ SharkGame.Gate = {
       message = "<img width=400 height=200 src='" + g.getSceneImagePath() + "' id='tabSceneImageEssence'>" + message;
       tabMessageSel.css("background-image", "url('" + g.tabBg + "')");
     }
-    tabMessageSel.html(message);
+    tabMessageSel.html("<div id='gateMessage' class='tabMessage'>" + message + "</div>");
   },
 
   update: function () {},

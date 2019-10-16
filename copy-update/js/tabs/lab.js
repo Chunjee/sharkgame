@@ -14,9 +14,9 @@ SharkGame.Lab = {
     }
   },
 
-  message: "<div id='tabMessage'>Sort of just off to the side, the science sharks congregate and discuss things with words you've never heard before.</div>",
+  message: "<div id='labMessage' class='tabMessage'>Sort of just off to the side, the science sharks congregate and discuss things with words you've never heard before.</div>",
   messageDone: 
-    "<div id='tabMessage'>Sort of just off to the side, the science sharks quietly wrap up their badly disguised party and pretend to work.<br/>" +
+    "<div id='labMessage' class='tabMessage'>Sort of just off to the side, the science sharks quietly wrap up their badly disguised party and pretend to work.<br/>" +
     "Looks like that's it! No more things to figure out.</div>",
 
 
