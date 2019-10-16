@@ -372,10 +372,12 @@ SharkGame.Resources = {
     } else {
       // iterate through data, if total amount > 0 add a row
       $.each(SharkGame.ResourceTable, function (k, v) {
-        if (r.getTotalResource(k) > 0 && w.doesResourceExist(k)) {
-          var row = r.constructResourceTableRow(k);
-          rTable.append(row);
-          anyResourcesInTable = true;
+        if (r.getCategoryOfResource(k) !== 'special' && r.getCategoryOfResource(k) !== 'breeders' && r.getCategoryOfResource(k) !== 'specialists' && r.getCategoryOfResource(k) !== 'machines') {
+          if (r.getTotalResource(k) > 0 && w.doesResourceExist(k)) {
+            var row = r.constructResourceTableRow(k);
+            rTable.append(row);
+            anyResourcesInTable = true;
+          }
         }
       });
     }
