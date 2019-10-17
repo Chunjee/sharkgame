@@ -460,13 +460,13 @@ SharkGame.Home = {
     } else {
       var costText = r.resourceListToString(actionCost, !enableButton);
       if (costText != "") {
-        label += "<p class='buttonCost'>Cost: " + costText + "</p>";
+        label += "<p class='buttonCost click-passthrough'>Cost: " + costText + "</p>";
       }
     }
 
     if (SharkGame.Settings.current.showTabHelp) {
       if (actionData.helpText) {
-        label += "<p class='medDesc'>" + actionData.helpText + "</p>";
+        label += "<p class='medDesc click-passthrough'>" + actionData.helpText + "</p>";
       }
     }
     button.prop("disabled", !enableButton)

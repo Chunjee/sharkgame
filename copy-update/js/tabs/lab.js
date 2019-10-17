@@ -137,14 +137,14 @@ SharkGame.Lab = {
     }
 
     var effects = SharkGame.Lab.getResearchEffects(upgradeData, !enableButton);
-    var labelHtml = "<div class='label'><p class='upgradeName'>" + upgradeData.name + 
+    var labelHtml = "<div class='label click-passthrough'><p class='upgradeName'>" + upgradeData.name + 
                     "</p><p class='upgradeDesc'>" + upgradeData.desc + "</p><p class='effects'>" +
                     effects + "</p></div>"
     var label = labelHtml;
     // upgradeData.name + "<br/>" + upgradeData.desc + "<br/>" + effects;
     var costText = r.resourceListToString(upgradeCost, !enableButton);
     if (costText != "") {
-      label += "<p class='upgradeCost'>Cost: " + costText + "</p>";
+      label += "<p class='upgradeCost click-passthrough'>Cost: " + costText + "</p>";
     }
     button.prop("disabled", !enableButton).html(label);
 
@@ -260,7 +260,7 @@ SharkGame.Lab = {
   },
 
   getResearchEffects: function (upgrade, darken) {
-    var effects = "<span class='medDesc' class='click-passthrough'>(Effects: ";
+    var effects = "<span class='medDesc click-passthrough'>(Effects: ";
     if (upgrade.effect) {
       if (upgrade.effect.multiplier) {
         $.each(upgrade.effect.multiplier, function (k, v) {
@@ -286,8 +286,8 @@ SharkGame.Lab = {
     var list = $('<ul>');
     $.each(u, function (k, v) {
       if (v.purchased) {
-        list.append($("<li class='purchasedUpgrade'>")
-          .html("<p class='upgradeName'>" + v.name + "<span class='medDesc'>" + v.effectDesc + "</span></p>")
+        list.append($("<li class='purchasedUpgrade click-passthrough'>")
+          .html("<p class='upgradeName click-passthrough'>" + v.name + "<span class='medDesc'>" + v.effectDesc + "</span></p>")
         );
       }
     });
