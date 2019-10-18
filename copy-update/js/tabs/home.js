@@ -181,7 +181,7 @@ SharkGame.Home = {
       actionData.discovered = false;
       actionData.newlyDiscovered = false;
     });
-
+    h.createButtonTabs();
     h.currentExtraMessageIndex = -1;
     h.currentButtonTab = "all";
   },
