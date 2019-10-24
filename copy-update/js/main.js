@@ -11,6 +11,7 @@ SG.main = {
   init: function() {
 
     SG.resources.init();
+    SG.world.init();
   },
 
 };
