@@ -6,7 +6,8 @@ my notes:
 - number keyboard shortcuts for tabs
 
 
-
+later:
+-dont forget about the aitest.js
 
 ////////////////////////////////// original plan.txt file: //////////////////////////////////
 
