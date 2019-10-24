@@ -728,7 +728,7 @@ SG.resourceTable = {
 
 };
 
-SharkGame.ResourceCategories = {
+SG.ResourceCategories = {
   special: {
     name: "Special",
     disposeMessage: [

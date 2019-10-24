@@ -12,5 +12,10 @@ SG.main = {
 
     SG.resources.init();
   },
-  
+
+};
+
+
+window.onload = function() {
+  this.SG.main.init();
 }
