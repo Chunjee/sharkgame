@@ -12,6 +12,7 @@ SG.main = {
 
     SG.resources.init();
     SG.world.init();
+    SG.world.apply();
   },
 
 };

@@ -25,4 +25,8 @@ SG.resources = {
     this.specialMultiplier = 1;
   },
 
+  isCategory: function(name) {
+    return typeof (SG.resourceCategories[name]) !== 'undefined';
+  },
+
 };
