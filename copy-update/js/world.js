@@ -5,7 +5,16 @@ SG.world = {
   planetLevel: 1,
 
   init: function() {
-    // resetWorldProperties - set up defaults
+    this.resetWorldProperties();
+  },
+
+  apply: function() {
+    this.applyWorldProperties(this.planetLevel);
+    this.applyGateCosts(this.planetLevel);
+  },
+
+  resetWorldProperties: function() {
+    // set up defaults
     var worldResources = this.worldResources;
 
     for (resource in SG.resourceTable) {
@@ -18,6 +27,14 @@ SG.world = {
       worldResource.boostMultiplier = 1;
       worldResource.artifactMultiplier = 1;
     }
+  },
+
+  applyWorldProperties: function(level) {
+    
+  },
+
+  applyGateCosts: function(level) {
+
   },
 
 };
