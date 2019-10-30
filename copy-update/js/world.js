@@ -73,14 +73,10 @@ SG.world = {
         resourceList.forEach(function(resource) {
           worldModifier.apply(effectiveLevel, resource, modifierData.amount);
         });
-      } else { // modifying resource is not a category
+      } else { // if modifying resource is not a category
         worldModifier.apply(effectiveLevel, modifierData.resource, modifierData.amount);
       }
     });
-  },
-
-  applyGateCosts: function(level) {
-    
   },
 
   getTerraformMultiplier: function() {
@@ -90,5 +86,22 @@ SG.world = {
     }
     return 1;
   },
+
+  applyGateCosts: function(level) {
+    var worldInfo = SG.worldTypes[this.worldType];
+
+    // get multiplier
+    var gateCostMultiplier = this.getGateCostMultiplier();
+
+    SG.gate.createSlots(worldInfo.gateCosts, this.planetLevel, gateCostMultiplier);
+  },
+
+  getGateCostMultiplier: function() {
+    var gateCostReducerLevel = SG.artifacts.gateCostReducer.level;
+    if (gateCostReducerLevel > 0) {
+      return Math.pow(0.9, gateCostReducerLevel);
+    }
+    return 1;
+  }
 
 };
