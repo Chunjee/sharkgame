@@ -21,6 +21,7 @@ SG.main = {
     // TODO:
     // SG.gateway.applyArtifacts();
 
+    SG.log.clearMessages();
   },
 
 };
