@@ -1,3 +1,6 @@
+SG.artifactsUtil = {
+};
+
 SG.artifacts = {
   planetTerraformer: { // handled specially: world.getTerraformMultipler
     name: 'World Shaper',
@@ -16,5 +19,5 @@ SG.artifacts = {
     cost: function(level) {
       return Math.floor(Math.pow(3, level + 1));
     }
-  }
-}
+  },
+};
