@@ -31,6 +31,13 @@ SG.main = {
     SG.home.init();
     SG.lab.init();
     SG.stats.init();
+    // TODO: recycler 
+    SG.gate.init();
+    SG.reflection.init();
+
+    // TODO: setuptitlebar
+
+    SG.tabs.current = 'home';
   },
 
 };

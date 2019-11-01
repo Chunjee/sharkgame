@@ -1,5 +1,26 @@
 SG.gate = {
 
+  tabId: 'gate',
+  tabDiscovered: false,
+  tabName: 'strage gate',
+
+  discoverReq: {
+    upgrade: [
+      'gateDiscovery'
+    ]
+  },
+
+  init: function() {
+    SG.tabs[this.tabId] = {
+      id: this.tabId,
+      name: this.tabName,
+      discovered: this.tabDiscovered,
+      discoverReq: this.discoverReq,
+      code: this
+    };
+
+    this.opened = false;
+  },
 
   createSlots: function(gateSlots, planetLevel, gateCostMultiplier) {
     // create gate.costs

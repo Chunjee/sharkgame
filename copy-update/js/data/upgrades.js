@@ -57,5 +57,38 @@ SG.upgrades = {
         'crystalContainer'
       ]
     }
+  },
+  farExploration: {
+    name: '',
+    desc: '',
+    researchedMessage: '',
+    effectDesc: '',
+    cost: {
+      science: 8000,
+      fish: 15000
+    },
+    /* required: {
+      upgrades: [
+        'exploration'
+      ]
+    } */
+  },
+
+
+  gateDiscovery: {
+    name: 'Chasm Exploration',
+    desc: 'A campaign of risky, foolhardy expeditions to the deeps, to find whatever can be found.',
+    researchedMessage: 'A strange structure was found from clues within the chasms. The cost was great, but the discovery is greater!',
+    effectDesc: 'Something ancient lurked in the depths.',
+    cost: {
+      science: 1E6, // 1,000,000
+      shark: 1000,
+      fish: 50000
+    },
+    required: {
+      upgrades: [
+        'farExploration'
+      ]
+    }
   }
 }
